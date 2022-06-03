@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_delete_forever_24" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:text="Thong bao"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="100dp"
+            android:id="@+id/buttonHuy"
+            style="@style/customButton"
+            android:layout_gravity="center"
+            android:text="Huy" />
+
+        <Button
+            android:layout_width="100dp"
+            android:id="@+id/buttonDongY"
+            style="@style/customButton"
+            android:layout_gravity="center"
+            android:background="#BA2727"
+            android:text="Xac Nhan" />
+    </LinearLayout>
+
+</LinearLayout>

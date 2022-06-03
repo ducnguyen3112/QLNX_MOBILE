@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".activity.main.ForgotPasswdActivity">
+
+    <ImageButton
+        android:id="@+id/iv_backforgot"
+        style="@style/backArrow"
+        android:src="@drawable/ic_back"
+        android:background="@android:color/transparent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/iv_backforgot"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context="in.insideandroid.template.LoginActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbarThumbHorizontal="@null"
+            android:scrollbarThumbVertical="@null">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/forgot" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:text="Forgot password? No worries"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:text="We will send you a OTP to reset your password"
+                    android:textColor="#A5A5A5" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    app:cardBackgroundColor="@color/colorTextInputBackground"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_phoneForgot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:background="@android:color/transparent"
+                        android:drawableStart="@drawable/ic_phone"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:drawablePadding="12dp"
+                        android:hint="Phone number"
+                        android:imeOptions="actionDone"
+                        android:inputType="textEmailAddress"
+                        android:minWidth="320dp"
+                        android:minHeight="45dp"
+                        android:singleLine="true" />
+                </androidx.cardview.widget.CardView>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+                    <Button
+                        android:id="@+id/btn_send"
+                        style="@style/Button1"
+                        android:layout_width="342dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="SEND"
+                        />
+                    <ProgressBar
+                        android:id="@+id/progessForgot"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"/>
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</RelativeLayout>

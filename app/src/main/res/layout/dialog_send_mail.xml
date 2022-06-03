@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/blueLight">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="NHẬP MAIL ĐỂ NHẬN FILE"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etMail_dialogSendMail"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="ahrix157@gmail.com"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/rounded_corners_button_border"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnHuy_dialogSendMail"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:text="để sau"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnOK_dialogSendMail"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:text="ok"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

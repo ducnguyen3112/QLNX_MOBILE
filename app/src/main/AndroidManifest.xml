@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.quanlynhapxuat">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:requestLegacyExternalStorage="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.QuanLyNhapXuat"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity
+            android:name=".activity.DetailEmployeeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity
+            android:name=".activity.EmployeesActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.DetailProductActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".activity.KhachHang.ChiTietActivity"
+            android:label="Chi Tiết Lịch Sử"
+            android:parentActivityName=".activity.KhachHang.ProfileKHActivity" />
+        <activity
+            android:name=".activity.ReceivedDocket.ReceivedDocketDetailActivity"
+            android:exported="false"
+            android:label="PHIẾU NHẬP" />
+        <activity
+            android:label="Thông Tin Khách Hàng"
+            android:name=".activity.KhachHang.ProfileKHActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.KhachHang.ListKHActivity" />
+        <activity
+            android:name=".activity.KhachHang.UpdateKHActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.KhachHang.ListKHActivity" />
+        <activity
+            android:name=".activity.KhachHang.AddKHActivity"
+            android:exported="false"
+            android:label="Thêm Khách Hàng"
+            android:parentActivityName=".activity.KhachHang.ListKHActivity" />
+        <activity
+            android:name=".activity.KhachHang.ListKHActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.main.MainActivity" />
+        <activity
+            android:name=".activity.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".activity.main.ForgotPasswdActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.main.VerifyOTPActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.main.SignupActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.main.LoginActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

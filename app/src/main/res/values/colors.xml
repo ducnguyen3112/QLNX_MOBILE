@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#4287f5</color>
+    <color name="colorPrimaryDark">#4287f5</color>
+    <color name="colorAccent">#EF5350</color>
+    <color name="colorBackground">#fff</color>
+    <color name="colorIcon">#cccccc</color>
+    <color name="colorTextInputBackground">#F7F7F7</color>
+    <color name="actionbarOpacity">#00000000</color>
+    <color name="md_cyan_700">#0097A7</color>
+    <color name="md_black_1000">#000000</color>
+    <color name="subText">#7E7E7E</color>
+
+    <color name="blue">#0000FF</color>
+    <color name="blueLight">#A8A8F7</color>
+    <color name="gray">#817877</color>
+
+    <color name="dialogBackColor">#0091C2</color>
+
+    <color name="fragmentBackColor">#E4E4E4</color>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_home"
+        android:title="Trang chủ"
+        android:icon="@drawable/ic_home_nav" />
+    <item android:id="@+id/menu_import"
+        android:title="Phiếu nhập"
+        android:icon="@drawable/ic_import_nav" />
+    <item android:id="@+id/menu_export"
+        android:title="Phiếu xuất"
+        android:icon="@drawable/ic_export_nav" />
+    <item android:id="@+id/menu_products"
+        android:title="Sản phẩm"
+        android:icon="@drawable/ic_box_nav" />
+    <item android:id="@+id/menu_more"
+        android:title="Nhiều hơn"
+        android:icon="@drawable/ic_bars_nav" />
+
+</menu>

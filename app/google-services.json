@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "855532694390",
+    "project_id": "moblie-otp-final",
+    "storage_bucket": "moblie-otp-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855532694390:android:98772fec589b4d98a62857",
+        "android_client_info": {
+          "package_name": "com.example.quanlynhapxuat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855532694390-ar0arkllmtvpgv6drch3aqlfrv3r3m7i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quanlynhapxuat",
+            "certificate_hash": "9cdabc0887cc8ebe74915169e2b90371d326916c"
+          }
+        },
+        {
+          "client_id": "855532694390-brds3ir9keltlqi9jbf677evimtq14f6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB88v_2Hhfd9B9Er0pxA0cmys0DdQiRljE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855532694390-brds3ir9keltlqi9jbf677evimtq14f6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

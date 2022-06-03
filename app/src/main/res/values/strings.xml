@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">QuanLyNhapXuat</string>
+    <string name="text_signin_signup">Don\'t have an account? <b>Sign up</b></string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="product_name">Tên sản phẩm</string>
+    <string name="product_id">ID</string>
+    <string name="product">Sản phẩm</string>
+
+    <string name="employee_name">Tên nhân viên</string>
+    <string name="employee_sex">Giới tính</string>
+    <string name="employee_address">Địa chỉ</string>
+    <string name="employee_birthday">Ngày sinh</string>
+    <string name="employee_phone">Số điện thoại</string>
+    <string name="employee_role">Role</string>
+    <string name="employee_pass">Mật khẩu</string>
+    <string name="employee_status">Trạng thái</string>
+    <string name="employee_avatar">Avatar</string>
+    <string name="search">Search</string>
+</resources>

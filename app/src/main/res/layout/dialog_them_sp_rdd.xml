@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="60dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/blueLight">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="-- THÊM SẢN PHẨM --"
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:gravity="center|bottom">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="Sản phẩm"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <Spinner
+                    android:id="@+id/spinSP_dialogThemSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/bg_spinner"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:gravity="bottom|center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="Số lượng"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etSL_dialogThemSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="number"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/rounded_corners_button_border"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:gravity="bottom|center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="Đơn giá (VND)"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etDonGia_dialogThemSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="number"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/rounded_corners_button_border"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnHuy_dialogThemSP"
+                    android:layout_width="110dp"
+                    android:layout_height="60dp"
+                    android:text="hủy"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <Space
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btnThem_dialogThemSP"
+                    android:layout_width="110dp"
+                    android:layout_height="60dp"
+                    android:text="thêm"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

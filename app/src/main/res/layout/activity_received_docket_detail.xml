@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/actionbarOpacity"
+    android:backgroundTint="@color/actionbarOpacity"
+    android:foregroundTint="@color/actionbarOpacity"
+    tools:context=".activity.ReceivedDocket.ReceivedDocketDetailActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvDocketInfo_activityReceivedDocketDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blueLight">
+
+                <TextView
+                    android:id="@+id/tvTittle_activityRDD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="TẠO PHIẾU NHẬP"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Mã Phiếu Nhập: "
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvMaPN_activityRDD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="PN007"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:gravity="start|center">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nhân viên tạo:"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvMaNV_activityRDD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NV015"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:gravity="start|center">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày đặt:"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etNgayDat_activityRDD"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:hint="12/12/2012 12:12"/>
+
+                <ImageView
+                    android:id="@+id/ivDatePicker_activityRDD"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@color/actionbarOpacity"
+                    app:srcCompat="@drawable/icon_calendar"
+                    app:tint="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="0dp"
+                android:gravity="start|center">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nhà Cung Cấp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etNhaCungCap_activityRDD"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/blueLight"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|end"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng Giá Trị: "
+                    android:textSize="16sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/tvTongGiaTri_activityRDD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10.000.000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvListChiTietPN_activityRDD"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_max="300dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvDocketInfo_activityReceivedDocketDetail"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnHuy_activityRDD"
+            android:layout_width="110dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="10dp"
+            android:text="hủy"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnThemSanPham_activityRDD"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="10dp"
+            android:text="thêm\nsản phẩm"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnTaoPhieuNhap_activityRDD"
+            android:layout_width="110dp"
+            android:layout_height="70dp"
+            android:text="tạo"
+            android:textSize="16sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
