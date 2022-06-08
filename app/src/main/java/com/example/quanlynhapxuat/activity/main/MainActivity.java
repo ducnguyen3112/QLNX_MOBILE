@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews(){
         bottomNav=findViewById(R.id.bottom_navigation);
     }
+
     public void goToDeliveryDetail(DeliveryDocket deliveryDocket){
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         ExportDetailFragment exportDetailFragment=new ExportDetailFragment();

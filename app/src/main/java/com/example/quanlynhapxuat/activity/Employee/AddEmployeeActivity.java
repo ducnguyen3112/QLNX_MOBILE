@@ -1,4 +1,13 @@
-package com.example.quanlynhapxuat.activity.KhachHang;
+package com.example.quanlynhapxuat.activity.Employee;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Intent;
@@ -11,23 +20,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.app.ActivityCompat;
 
 import com.example.quanlynhapxuat.R;
 import com.example.quanlynhapxuat.api.ApiUtils;
-import com.example.quanlynhapxuat.model.KhachHang;
+import com.example.quanlynhapxuat.model.Employee;
 import com.example.quanlynhapxuat.model.Message;
 import com.example.quanlynhapxuat.model.RealPathUtil;
 import com.example.quanlynhapxuat.utils.CustomToast;
@@ -43,12 +43,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddKHActivity extends AppCompatActivity {
+public class AddEmployeeActivity extends AppCompatActivity {
 
-    private ImageView ivAvatar;
-    private TextView txtChooseImgae;
-    private EditText edtAddNameKH, edtAddAddressKH, edtAddPhoneKH, edtAddEmailKH;
-    private Button btnAddKH, btnCancelAddKH;
+    private ImageView ivAvatarE;
+    private TextView txtChooseImageE;
+    private EditText edtAddNameE, edtAddAddressE, edtAddPhoneE;
+    private Button btnAddE, btnCancelAddE;
+    DatePicker datePicker;
     private static final int REQUEST_CODE_FOLDER = 123;
     private Uri mUri;
     private Drawable drawable;
@@ -64,7 +65,7 @@ public class AddKHActivity extends AppCompatActivity {
                         try {
                             InputStream inputStream = getContentResolver().openInputStream(uri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            ivAvatar.setImageBitmap(bitmap);
+                            ivAvatarE.setImageBitmap(bitmap);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -76,64 +77,68 @@ public class AddKHActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_khactivity);
+        setContentView(R.layout.activity_add_employee);
         setControl();
         setEvent();
     }
 
+
     private void setControl() {
         drawable = AppCompatResources.getDrawable(this, R.drawable.ic_baseline_account_circle);
-        ivAvatar = findViewById(R.id.ivAvatar);
-        ivAvatar.setImageDrawable(drawable);
-        edtAddNameKH = findViewById(R.id.edtAddNameKH);
-        edtAddAddressKH = findViewById(R.id.edtAddAddressKH);
-        edtAddPhoneKH = findViewById(R.id.edtAddPhoneKH);
-        edtAddEmailKH = findViewById(R.id.edtAddEmailKH);
-        btnAddKH = findViewById(R.id.btnAddKH);
-        btnCancelAddKH = findViewById(R.id.btnCancelAddKH);
-        txtChooseImgae = findViewById(R.id.txtChooseImgae);
+        ivAvatarE = findViewById(R.id.ivAvatarE);
+        ivAvatarE.setImageDrawable(drawable);
+        datePicker = findViewById(R.id.datePicker);
+        edtAddNameE = findViewById(R.id.edtAddNameE);
+        edtAddAddressE = findViewById(R.id.edtAddAddressE);
+        edtAddPhoneE = findViewById(R.id.edtAddPhoneE);
+        btnAddE = findViewById(R.id.btnAddE);
+        btnCancelAddE = findViewById(R.id.btnCancelAddE);
+        txtChooseImageE = findViewById(R.id.txtChooseImageE);
     }
 
-
     private void setEvent() {
-        txtChooseImgae.setOnClickListener(new View.OnClickListener() {
+        txtChooseImageE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String[] arrayPermissions = {
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
                 };
-                ActivityCompat.requestPermissions(AddKHActivity.this, arrayPermissions, REQUEST_CODE_FOLDER);
+                ActivityCompat.requestPermissions(AddEmployeeActivity.this, arrayPermissions, REQUEST_CODE_FOLDER);
             }
         });
 
 
-        btnAddKH.setOnClickListener(view -> {
-            if (validationKH()) {
-                String fullName = edtAddNameKH.getText().toString().trim();
-                String phoneNumber = edtAddPhoneKH.getText().toString().trim();
-                String address = edtAddAddressKH.getText().toString().trim();
-                String email = edtAddEmailKH.getText().toString().trim();
-                KhachHang kh = new KhachHang(fullName, phoneNumber, address, email);
-                if (ivAvatar.getDrawable().equals(drawable)) {
-                    ApiUtils.getKhachHangService().createKH(kh).enqueue(new Callback<KhachHang>() {
+        btnAddE.setOnClickListener(view -> {
+            if (validationE()) {
+                String fullName = edtAddNameE.getText().toString().trim();
+                String phoneNumber = edtAddPhoneE.getText().toString().trim();
+                String address = edtAddAddressE.getText().toString().trim();
+                int status = 1;
+                int role = 1;
+                String password = "123456789";
+                String dateOfBirth = datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth();
+                Employee employee = new Employee(fullName, address, dateOfBirth, phoneNumber, role, password, status);
+
+                if (ivAvatarE.getDrawable().equals(drawable)) {
+                    ApiUtils.employeeRetrofit().createEmployee(employee).enqueue(new Callback<Employee>() {
                         @Override
-                        public void onResponse(Call<KhachHang> call, Response<KhachHang> response) {
+                        public void onResponse(Call<Employee> call, Response<Employee> response) {
                             if (response.isSuccessful()) {
-                                CustomToast.makeText(AddKHActivity.this, "Thêm khách hàng thành công",
+                                CustomToast.makeText(AddEmployeeActivity.this, "Thêm nhân viên thành công",
                                         CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<KhachHang> call, Throwable t) {
-                            CustomToast.makeText(AddKHActivity.this, "Thêm khách hàng thất bại",
+                        public void onFailure(Call<Employee> call, Throwable t) {
+                            CustomToast.makeText(AddEmployeeActivity.this, "Thêm nhân viên thất bại",
                                     CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                             Log.e("Error", t.getMessage());
                         }
                     });
                 } else {
-                    String strReadPath = RealPathUtil.getRealPath(AddKHActivity.this, mUri);
+                    String strReadPath = RealPathUtil.getRealPath(AddEmployeeActivity.this, mUri);
                     File file = new File(strReadPath);
                     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                     MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
@@ -141,19 +146,19 @@ public class AddKHActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
-                            kh.setAvatar(message.getMessage());
-                            ApiUtils.getKhachHangService().createKH(kh).enqueue(new Callback<KhachHang>() {
+                            employee.setAvatar(message.getMessage());
+                            ApiUtils.employeeRetrofit().createEmployee(employee).enqueue(new Callback<Employee>() {
                                 @Override
-                                public void onResponse(Call<KhachHang> call, Response<KhachHang> response) {
+                                public void onResponse(Call<Employee> call, Response<Employee> response) {
                                     if (response.isSuccessful()) {
-                                        CustomToast.makeText(AddKHActivity.this, "Thêm khách hàng thành công",
+                                        CustomToast.makeText(AddEmployeeActivity.this, "Thêm nhân viên thành công",
                                                 CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                                     }
                                 }
 
                                 @Override
-                                public void onFailure(Call<KhachHang> call, Throwable t) {
-                                    CustomToast.makeText(AddKHActivity.this, "Thêm khách hàng thất bại",
+                                public void onFailure(Call<Employee> call, Throwable t) {
+                                    CustomToast.makeText(AddEmployeeActivity.this, "Thêm nhân viên thất bại",
                                             CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                                     Log.e("Error", t.getMessage());
                                 }
@@ -162,63 +167,52 @@ public class AddKHActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            CustomToast.makeText(AddKHActivity.this, "Thêm avatar thất bại",
+                            CustomToast.makeText(AddEmployeeActivity.this, "Thêm avatar thất bại",
                                     CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                             Log.e("Error", t.getMessage());
                         }
                     });
                 }
-
-
             }
-
         });
-        btnCancelAddKH.setOnClickListener(view -> {
-            Intent intent = new Intent(AddKHActivity.this, ListKHActivity.class);
+
+        btnCancelAddE.setOnClickListener(view -> {
+            Intent intent = new Intent(AddEmployeeActivity.this, ListEmployeeActivity.class);
             startActivity(intent);
         });
     }
 
-    boolean validationKH() {
-        String fullName = edtAddNameKH.getText().toString().trim();
-        String address = edtAddAddressKH.getText().toString().trim();
-        String phoneNumber = edtAddPhoneKH.getText().toString().trim();
-        String email = edtAddEmailKH.getText().toString().trim();
+    boolean validationE() {
+        String fullName = edtAddNameE.getText().toString().trim();
+        String address = edtAddAddressE.getText().toString().trim();
+        String phoneNumber = edtAddPhoneE.getText().toString().trim();
 
         if (fullName.isEmpty()) {
-            CustomToast.makeText(AddKHActivity.this, "Không được để trống trường tên",
+            CustomToast.makeText(AddEmployeeActivity.this, "Không được để trống trường tên",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         } else if (fullName.length() < 2) {
-            CustomToast.makeText(AddKHActivity.this, "Tên khách hàng tối thiểu 2 ký tự",
+            CustomToast.makeText(AddEmployeeActivity.this, "Tên nhân viên tối thiểu 2 ký tự",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         } else if (fullName.length() > 30) {
-            CustomToast.makeText(AddKHActivity.this, "Tên khách hàng không 30 ký tự",
+            CustomToast.makeText(AddEmployeeActivity.this, "Tên nhân viên không 30 ký tự",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         } else if (address.isEmpty()) {
-            CustomToast.makeText(AddKHActivity.this, "Không được để trống trường địa chỉ",
+            CustomToast.makeText(AddEmployeeActivity.this, "Không được để trống trường địa chỉ",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         } else if (address.length() < 2) {
-            CustomToast.makeText(AddKHActivity.this, "Địa chỉ tối thiểu 2 ký tự",
+            CustomToast.makeText(AddEmployeeActivity.this, "Địa chỉ tối thiểu 2 ký tự",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         } else if (phoneNumber.length() > 12) {
-            CustomToast.makeText(AddKHActivity.this, "Số điện thoại tối đa 11 số",
+            CustomToast.makeText(AddEmployeeActivity.this, "Số điện thoại tối đa 11 số",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         } else if (phoneNumber.length() < 10) {
-            CustomToast.makeText(AddKHActivity.this, "Số điện thoại tối thiểu 10 số",
-                    CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
-            return false;
-        } else if (email.isEmpty()) {
-            CustomToast.makeText(AddKHActivity.this, "Không được để trống trường email",
-                    CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
-            return false;
-        } else if (email.length() < 2) {
-            CustomToast.makeText(AddKHActivity.this, "Email tối thiểu 2 ký tự",
+            CustomToast.makeText(AddEmployeeActivity.this, "Số điện thoại tối thiểu 10 số",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         }
@@ -227,7 +221,7 @@ public class AddKHActivity extends AppCompatActivity {
 
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(AddKHActivity.this, ListKHActivity.class);
+        Intent intent = new Intent(AddEmployeeActivity.this, ListEmployeeActivity.class);
         startActivity(intent);
     }
 
@@ -243,6 +237,4 @@ public class AddKHActivity extends AppCompatActivity {
                 activityResultLauncher.launch(Intent.createChooser(intent, "Select Avatar"));
             }
     }
-
-
 }

@@ -64,40 +64,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     public void signinClick(){
-        String phone=etPhoneLogin.getText().toString().trim();
-        String password=etPasswordLogin.getText().toString();
-        EmployeeService.employeeService.authenticationEmployee(phone,password).enqueue(new Callback<Employee>() {
-            @Override
-            public void onResponse(Call<Employee> call, Response<Employee> response) {
-                if (response.isSuccessful()){
-                    Employee employee=response.body();
-                    idLogin=employee.getId();
-                    nameLogin=employee.getFullName();
-                    Toast.makeText(LoginActivity.this,"Đăng nhập thành công!",
-                            Toast.LENGTH_SHORT).show();
-                    Intent intent1=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent1);
-                }
-                else {
-                    try {
-                        Gson g = new Gson();
-                        RestErrorResponse errorResponse = g.fromJson(response.errorBody().string(), RestErrorResponse.class);
-                        Toast.makeText(LoginActivity.this, errorResponse.getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(LoginActivity.this, e.getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Employee> call, Throwable t) {
-                Toast.makeText(LoginActivity.this,"Sai số điện thoại hoặc mật khẩu!",
-                        Toast.LENGTH_SHORT).show();
-                Log.e("login", t.getMessage() );
-            }
-        });
+        //String phone=etPhoneLogin.getText().toString().trim();
+        //String password=etPasswordLogin.getText().toString();
+        Intent intent1=new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent1);
+//        EmployeeService.employeeService.authenticationEmployee(phone,password).enqueue(new Callback<Employee>() {
+//            @Override
+//            public void onResponse(Call<Employee> call, Response<Employee> response) {
+//                if (response.isSuccessful()){
+//                    Employee employee=response.body();
+//                    idLogin=employee.getId();
+//                    nameLogin=employee.getFullName();
+//                    Toast.makeText(LoginActivity.this,"Đăng nhập thành công!",
+//                            Toast.LENGTH_SHORT).show();
+//                    Intent intent1=new Intent(LoginActivity.this,MainActivity.class);
+//                    startActivity(intent1);
+//                }
+//                else {
+//                    try {
+//                        Gson g = new Gson();
+//                        RestErrorResponse errorResponse = g.fromJson(response.errorBody().string(), RestErrorResponse.class);
+//                        Toast.makeText(LoginActivity.this, errorResponse.getMessage(),
+//                                Toast.LENGTH_SHORT).show();
+//                    } catch (Exception e) {
+//                        Toast.makeText(LoginActivity.this, e.getMessage(),
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Employee> call, Throwable t) {
+//                Toast.makeText(LoginActivity.this,"Sai số điện thoại hoặc mật khẩu!",
+//                        Toast.LENGTH_SHORT).show();
+//                Log.e("login", t.getMessage() );
+//            }
+//        });
     }
 
 }

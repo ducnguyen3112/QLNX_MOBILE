@@ -25,6 +25,33 @@
         <entry key="..\:/Projects/Android/app/src/main/res/layout/item_ctpx.xml" value="0.264" />
         <entry key="..\:/Projects/Android/app/src/main/res/layout/item_khachhang_spinner.xml" value="0.2259963768115942" />
         <entry key="..\:/Projects/Android/app/src/main/res/layout/item_phieuxuat.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/drawable/custom_local_phone_icon.xml" value="0.162" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/drawable/custom_location_on_icon.xml" value="0.162" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/drawable/custom_lock_icon.xml" value="0.162" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/drawable/custom_switch.xml" value="0.2075" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/drawable/ic_baseline_location_on_24_focused.xml" value="0.162" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_add_employee.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_add_khactivity.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_detail_employee.xml" value="0.264" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_detail_product.xml" value="0.11775362318840579" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_employees.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_list_employee.xml" value="0.136" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_list_khactivity.xml" value="0.25" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_login.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_profile_employee.xml" value="0.2" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_profile_khactivity.xml" value="0.14356884057971014" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_update_employee.xml" value="0.2" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_update_khactivity.xml" value="0.25" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/fragment_more.xml" value="0.25" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/fragment_thong_tin_k_h.xml" value="0.14356884057971014" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/item_employee.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/item_employee_list.xml" value="0.25" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/item_kh.xml" value="0.25" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/layout/item_khachhang_spinner.xml" value="0.11775362318840579" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/menu/main_menu.xml" value="0.25" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/menu/menu_list_employee.xml" value="0.25" />
+        <entry key="..\:/Users/PC/Desktop/QLNX_MOBILE/app/src/main/res/menu/popup_menu_ctpx.xml" value="0.25" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/drawable/custom_button_2.xml" value="0.1" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/drawable/custom_person_icon.xml" value="0.1565" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/layout/activity_list_khactivity.xml" value="0.25416666666666665" />

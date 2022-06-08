@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlynhapxuat.R;
-import com.example.quanlynhapxuat.activity.main.MainActivity;
 import com.example.quanlynhapxuat.adapter.KhachHangAdapter;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.KhachHang;
@@ -59,7 +58,7 @@ public class ListKHActivity extends AppCompatActivity {
             public void onResponse(Call<List<KhachHang>> call, Response<List<KhachHang>> response) {
                 if (response.isSuccessful()) {
                     List<KhachHang> list = response.body();
-                    khachHangAdapter.setDate(list);
+                    khachHangAdapter.setData(list);
                 }
             }
 

@@ -19,6 +19,7 @@ import com.example.quanlynhapxuat.model.Employee;
 import com.example.quanlynhapxuat.utils.CustomToast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,10 +28,10 @@ import retrofit2.Response;
 public class EmployeetRecyclerViewAdapter extends RecyclerView.Adapter<EmployeetRecyclerViewAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList<Employee> list;
+    private List<Employee> list;
     int check = 0;
 
-    public EmployeetRecyclerViewAdapter(@NonNull Context context, @NonNull ArrayList<Employee> list) {
+    public EmployeetRecyclerViewAdapter(@NonNull Context context, @NonNull List<Employee> list) {
         super();
         this.context = context;
         this.list = list;
