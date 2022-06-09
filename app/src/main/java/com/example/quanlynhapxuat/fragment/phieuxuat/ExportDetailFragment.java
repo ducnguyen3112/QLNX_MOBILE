@@ -131,7 +131,7 @@ public class ExportDetailFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.menupx_sua:
-                                Toast.makeText(mainActivity,"Sử",
+                                Toast.makeText(mainActivity,"Sửa",
                                         Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.menupx_xuatfile:
@@ -139,12 +139,10 @@ public class ExportDetailFragment extends Fragment {
                                         Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.menupx_hoanthanh:
-                                Toast.makeText(mainActivity,"Hoàn thành",
-                                        Toast.LENGTH_SHORT).show();
+                                hoanThanhDonHang();
                                 return true;
                             case R.id.menupx_huy:
-                                Toast.makeText(mainActivity,"Hủy",
-                                        Toast.LENGTH_SHORT).show();
+                                huyDonHang();
                                 return true;
                             default:return false;
                         }
@@ -162,9 +160,40 @@ public class ExportDetailFragment extends Fragment {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.getWindow().setLayout((7* MainActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
         alertDialog.show();
+        alertDialog.setMessage("Bạn muốn hoàn thành phiếu nhập này?");
+        alertDialog.setBtnNegative("Hủy");
+        alertDialog.setBtnPositive("Hoàn thành");
         alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+        alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+    }
+    public void huyDonHang(){
+        CustomAlertDialog alertDialog= new CustomAlertDialog(mainActivity);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.getWindow().setLayout((7* MainActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+        alertDialog.setMessage("Bạn muốn hủy phiếu nhập này?");
+        alertDialog.setBtnNegative("Cancel");
+        alertDialog.setBtnPositive("OK");
+        alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+        alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
             }
         });
     }

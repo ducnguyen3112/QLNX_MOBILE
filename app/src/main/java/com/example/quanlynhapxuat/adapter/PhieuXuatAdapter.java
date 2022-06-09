@@ -108,6 +108,7 @@ implements Filterable {
             @Override
             public void onClick(View v) {
                 itemListener.onclickItem(deliveryDocket);
+                ChiTietPXAdapter.status=0;
             }
         });
 

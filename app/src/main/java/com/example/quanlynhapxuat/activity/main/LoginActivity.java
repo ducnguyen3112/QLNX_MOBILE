@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
     private void initViews(){
-        btnForgot=findViewById(R.id.btn_forgot_password);
         btnSignin=findViewById(R.id.btn_signin);
         btnGoSignup=findViewById(R.id.btn_go_signup);
         etPhoneLogin=findViewById(R.id.et_phone_login);
@@ -48,16 +47,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_forgot_password:
-                Intent intent=new Intent(LoginActivity.this,ForgotPasswdActivity.class);
-                startActivity(intent);
+
             case R.id.btn_signin:
+
                 signinClick();
 //                Intent intent1=new Intent(LoginActivity.this,MainActivity.class);
 //                startActivity(intent1);
                 break;
             case R.id.btn_go_signup:
-                intent=new Intent(LoginActivity.this,SignupActivity.class);
+                Intent  intent=new Intent(LoginActivity.this,SignupActivity.class);
                 startActivity(intent);
                 break;
 
