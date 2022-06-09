@@ -21,7 +21,8 @@ public interface ReceivedDocketService {
     Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
 
     ReceivedDocketService RECEIVED_DOCKET_SERVICE = new Retrofit.Builder()
-            .baseUrl("https://shoesstation.herokuapp.com/api/")
+            //.baseUrl("https://shoesstation.herokuapp.com/api/")
+            .baseUrl("http://10.200.0.157:8080/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ReceivedDocketService.class);

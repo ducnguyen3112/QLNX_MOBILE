@@ -19,7 +19,8 @@ public interface EmployeeService {
     EmployeeService employeeService=new Retrofit.Builder()
             //http://192.168.0.6:8080/api/employees/
             //https://shoesstation.herokuapp.com/api/employees/
-            .baseUrl("https://shoesstation.herokuapp.com/api/")
+            //.baseUrl("https://shoesstation.herokuapp.com/api/")
+            .baseUrl("http://10.200.0.157:8080/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(EmployeeService.class);
