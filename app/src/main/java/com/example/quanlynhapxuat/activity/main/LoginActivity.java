@@ -64,8 +64,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void signinClick(){
         String phone=etPhoneLogin.getText().toString().trim();
         String password=etPasswordLogin.getText().toString();
-        Intent intent1=new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent1);
         EmployeeService.employeeService.authenticationEmployee(phone,password).enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {

@@ -20,16 +20,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlynhapxuat.R;
+import com.example.quanlynhapxuat.activity.main.LoginActivity;
 import com.example.quanlynhapxuat.activity.main.MainActivity;
 import com.example.quanlynhapxuat.adapter.ChiTietPXAdapter;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.DeliveryDocket;
 import com.example.quanlynhapxuat.model.DeliveryDocketDetail;
 import com.example.quanlynhapxuat.model.KhachHang;
+import com.example.quanlynhapxuat.service.DeliveryDocketService;
 import com.example.quanlynhapxuat.utils.Convert;
 import com.example.quanlynhapxuat.utils.CustomAlertDialog;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,8 +75,9 @@ public class ExportDetailFragment extends Fragment {
         Bundle bundleReceive=getArguments();
 
         List<DeliveryDocketDetail> deliveryDocketDetails=mainActivity.getmDeliveryDocketDetails() ;
+        DeliveryDocket deliveryDocket=new DeliveryDocket();
         if (bundleReceive!=null){
-            DeliveryDocket deliveryDocket= (DeliveryDocket) bundleReceive.get("deliveryDocket");
+            deliveryDocket = (DeliveryDocket) bundleReceive.get("deliveryDocket");
             if (deliveryDocket!=null){
                 tvIdPX.setText(String.valueOf(deliveryDocket.getId()));
                 tvNgay.setText(deliveryDocket.getCreatedAt());
@@ -117,10 +123,10 @@ public class ExportDetailFragment extends Fragment {
                 getParentFragmentManager().popBackStack();
             }
         });
-        showPopUpMenu();
+        showPopUpMenu(deliveryDocket.getId());
         return mView;
     }
-    public void showPopUpMenu(){
+    public void showPopUpMenu(int docketId){
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,10 +145,10 @@ public class ExportDetailFragment extends Fragment {
                                         Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.menupx_hoanthanh:
-                                hoanThanhDonHang();
+                                hoanThanhDonHang(docketId);
                                 return true;
                             case R.id.menupx_huy:
-                                huyDonHang();
+                                huyDonHang(docketId);
                                 return true;
                             default:return false;
                         }
@@ -155,7 +161,7 @@ public class ExportDetailFragment extends Fragment {
         });
 
     }
-    public void hoanThanhDonHang(){
+    public void hoanThanhDonHang(int docketId){
         CustomAlertDialog alertDialog= new CustomAlertDialog(mainActivity);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.getWindow().setLayout((7* MainActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -166,6 +172,23 @@ public class ExportDetailFragment extends Fragment {
         alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Map<Object,Object> fields=new HashMap<>();
+                fields.put("status",2);
+                DeliveryDocketService.deliveryDocketService.upDateDeliveryDocketOnField(fields,docketId).enqueue(new Callback<DeliveryDocket>() {
+                    @Override
+                    public void onResponse(Call<DeliveryDocket> call, Response<DeliveryDocket> response) {
+                        if (response.isSuccessful()){
+                            tvStatus.setText("Hoàn thành");
+                            Toast.makeText(mainActivity,"Đơn hàng được chuyển sang trạng thái hoàn thành!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DeliveryDocket> call, Throwable t) {
+
+                    }
+                });
                 alertDialog.cancel();
             }
         });
@@ -176,17 +199,34 @@ public class ExportDetailFragment extends Fragment {
             }
         });
     }
-    public void huyDonHang(){
+    public void huyDonHang(int docketId){
         CustomAlertDialog alertDialog= new CustomAlertDialog(mainActivity);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.getWindow().setLayout((7* MainActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
         alertDialog.show();
-        alertDialog.setMessage("Bạn muốn hủy phiếu nhập này?");
+        alertDialog.setMessage("Bạn chắc chắn muốn hủy phiếu nhập này?");
         alertDialog.setBtnNegative("Cancel");
         alertDialog.setBtnPositive("OK");
         alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Map<Object,Object> fields=new HashMap<>();
+                fields.put("status",0);
+                DeliveryDocketService.deliveryDocketService.upDateDeliveryDocketOnField(fields,docketId).enqueue(new Callback<DeliveryDocket>() {
+                    @Override
+                    public void onResponse(Call<DeliveryDocket> call, Response<DeliveryDocket> response) {
+                        if (response.isSuccessful()){
+                            tvStatus.setText("Đã hủy");
+                            Toast.makeText(mainActivity,"Đơn hàng được chuyển sang trạng thái đã hủy!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DeliveryDocket> call, Throwable t) {
+
+                    }
+                });
                 alertDialog.cancel();
             }
         });

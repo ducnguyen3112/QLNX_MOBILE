@@ -128,7 +128,7 @@ implements Filterable {
         for (int i = 0; i <deliveryDockets.size(); i++) {
             tong=0;
             for (int j = 0; j < deliveryDockets.get(i).getDeliveryDocketDetails().size(); j++) {
-                tong+=deliveryDockets.get(i).getDeliveryDocketDetails().get(j).getPrice();
+                tong+=deliveryDockets.get(i).getDeliveryDocketDetails().get(j).getPrice()*deliveryDockets.get(i).getDeliveryDocketDetails().get(j).getQuantity();
             }
             tongList+=tong;
         }
