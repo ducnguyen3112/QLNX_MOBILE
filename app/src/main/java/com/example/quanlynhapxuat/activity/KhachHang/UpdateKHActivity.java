@@ -3,10 +3,8 @@ package com.example.quanlynhapxuat.activity.KhachHang;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,10 +34,7 @@ import com.example.quanlynhapxuat.utils.CustomToast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -50,7 +45,7 @@ import retrofit2.Response;
 
 public class UpdateKHActivity extends AppCompatActivity {
 
-    private ImageView ivEditAvatar, ivEditAvatarOld;
+    private ImageView ivEditAvatar;
     private TextView txtEditChooseImgae;
     private EditText edtEditNameKH, edtEditAddressKH, edtEditPhoneKH, edtEditEmailKH;
     private Button btnEditKH, btnCancelEditKH;
@@ -58,16 +53,6 @@ public class UpdateKHActivity extends AppCompatActivity {
     private KhachHang dto;
     private Uri mUri;
     private Drawable drawable;
-    private Drawable avatarOld;
-
-    private Drawable drawableFromUrl(String url) throws IOException {
-        Bitmap x;
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.connect();
-        InputStream input = connection.getInputStream();
-        x = BitmapFactory.decodeStream(input);
-        return new BitmapDrawable(Resources.getSystem(), x);
-    }
 
 
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
@@ -99,7 +84,6 @@ public class UpdateKHActivity extends AppCompatActivity {
         setControl();
         getAndSetIntentData();
         setEvent();
-        Log.e("e", ivEditAvatar.getDrawable() + "");
     }
 
     void getAndSetIntentData() {
@@ -117,12 +101,12 @@ public class UpdateKHActivity extends AppCompatActivity {
         edtEditAddressKH.setText(dto.getAddress());
         edtEditPhoneKH.setText(dto.getPhoneNumber());
         edtEditEmailKH.setText(dto.getEmail());
+
     }
 
     private void setControl() {
         drawable = AppCompatResources.getDrawable(this, R.drawable.ic_baseline_account_circle);
         ivEditAvatar = findViewById(R.id.ivEditAvatar);
-        ivEditAvatarOld = findViewById(R.id.ivEditAvatarOld);
         txtEditChooseImgae = findViewById(R.id.txtEditChooseImgae);
         edtEditNameKH = findViewById(R.id.edtEditNameKH);
         edtEditAddressKH = findViewById(R.id.edtEditAddressKH);
@@ -130,7 +114,6 @@ public class UpdateKHActivity extends AppCompatActivity {
         edtEditEmailKH = findViewById(R.id.edtEditEmailKH);
         btnEditKH = findViewById(R.id.btnEditKH);
         btnCancelEditKH = findViewById(R.id.btnCancelEditKH);
-        txtEditChooseImgae = findViewById(R.id.txtEditChooseImgae);
     }
 
 
@@ -206,9 +189,12 @@ public class UpdateKHActivity extends AppCompatActivity {
                             public void onResponse(Call<Message> call, Response<Message> response) {
                                 Message message = response.body();
                                 dto.setAvatar(message.getMessage());
+                                Log.e("dto", dto.toString());
+
                                 ApiUtils.getKhachHangService().updateKHById(dto.getId(), dto).enqueue(new Callback<KhachHang>() {
                                     @Override
                                     public void onResponse(Call<KhachHang> call, Response<KhachHang> response) {
+
                                         if (response.isSuccessful()) {
                                             CustomToast.makeText(UpdateKHActivity.this, "Cập nhật thành công",
                                                     CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
@@ -239,8 +225,7 @@ public class UpdateKHActivity extends AppCompatActivity {
         btnCancelEditKH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UpdateKHActivity.this, ProfileKHActivity.class);
-                intent.putExtra("Check", 1);
+                Intent intent = new Intent(UpdateKHActivity.this, ListKHActivity.class);
                 startActivity(intent);
             }
         });

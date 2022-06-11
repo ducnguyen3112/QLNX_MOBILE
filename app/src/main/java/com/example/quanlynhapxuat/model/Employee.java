@@ -1,6 +1,7 @@
 package com.example.quanlynhapxuat.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Employee implements Serializable {
     private int id;
@@ -12,6 +13,8 @@ public class Employee implements Serializable {
     private String password;
     private int status;
     private String avatar;
+
+    List<DeliveryDocket> deliveryDockets;
 
     public Employee() {
     }
@@ -119,5 +122,29 @@ public class Employee implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<DeliveryDocket> getDeliveryDockets() {
+        return deliveryDockets;
+    }
+
+    public void setDeliveryDockets(List<DeliveryDocket> deliveryDockets) {
+        this.deliveryDockets = deliveryDockets;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role=" + role +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", avatar='" + avatar + '\'' +
+                ", deliveryDockets=" + deliveryDockets +
+                '}';
     }
 }

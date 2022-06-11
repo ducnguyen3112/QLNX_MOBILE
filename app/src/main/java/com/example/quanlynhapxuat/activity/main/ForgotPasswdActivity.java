@@ -47,6 +47,7 @@ public class ForgotPasswdActivity extends AppCompatActivity implements View.OnCl
         ivBack=findViewById(R.id.iv_backforgot);
         btnSend=findViewById(R.id.btn_send);
         etPhone=findViewById(R.id.et_phoneForgot);
+        progressBar=findViewById(R.id.progessForgot);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ForgotPasswdActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_send:
                 progressBar.setVisibility(View.VISIBLE);
                 btnSend.setVisibility(View.INVISIBLE);
-                String phoneNumber=etPhone.getText().toString().trim();
+                String phoneNumber="+84"+etPhone.getText().toString().trim().substring(1);
                 verifyPhoneNumber(phoneNumber);
                 Log.e("PhoneForgot", "Phone: "+phoneNumber );
                 break;

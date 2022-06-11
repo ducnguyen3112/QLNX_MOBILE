@@ -54,7 +54,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
         this.context = context;
     }
 
-    public void setDate(List<KhachHang> list) {
+    public void setData(List<KhachHang> list) {
         this.list = list;
         this.listOld = list;
         notifyDataSetChanged();
@@ -89,6 +89,8 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
                 activity.startActivityForResult(intent, 1);
             }
         });
+
+
 
         holder.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +136,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
                     @Override
                     public void onResponse(Call<List<KhachHang>> call, Response<List<KhachHang>> response) {
                         Log.e("H", response.body().toString());
-                        setDate(response.body());
+                        setData(response.body());
                     }
                     @Override
                     public void onFailure(Call<List<KhachHang>> call, Throwable t) {

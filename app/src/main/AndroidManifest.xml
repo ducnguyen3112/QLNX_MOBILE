@@ -4,28 +4,46 @@
     package="com.example.quanlynhapxuat">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyNhapXuat"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".activity.Employee.ProfileEmployeeActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.Employee.ListEmployeeActivity" />
+        <activity
+            android:name=".activity.Employee.UpdateEmployeeActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.Employee.ListEmployeeActivity" />
+        <activity
+            android:name=".activity.Employee.AddEmployeeActivity"
+            android:exported="false"
+            android:label="Thêm Nhân Viên"
+            android:parentActivityName=".activity.Employee.ListEmployeeActivity" />
+        <activity
+            android:name=".activity.Employee.ListEmployeeActivity"
+            android:exported="false"
+            android:label="Quản lý Nhân Viên"
+            android:parentActivityName=".activity.main.MainActivity" />
+        <activity
             android:name=".activity.DetailEmployeeActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".activity.EmployeesActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DetailProductActivity"
             android:exported="false"
@@ -39,9 +57,9 @@
             android:exported="false"
             android:label="PHIẾU NHẬP" />
         <activity
-            android:label="Thông Tin Khách Hàng"
             android:name=".activity.KhachHang.ProfileKHActivity"
             android:exported="false"
+            android:label="Thông Tin Khách Hàng"
             android:parentActivityName=".activity.KhachHang.ListKHActivity" />
         <activity
             android:name=".activity.KhachHang.UpdateKHActivity"
@@ -55,11 +73,12 @@
         <activity
             android:name=".activity.KhachHang.ListKHActivity"
             android:exported="false"
+            android:label="Quản lý Khách Hàng"
             android:parentActivityName=".activity.main.MainActivity" />
         <activity
             android:name=".activity.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.main.ForgotPasswdActivity"
             android:exported="false"

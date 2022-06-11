@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.Employee.ProfileEmployeeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivEAvatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_baseline_account_circle" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Tên Nhân Viên"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/edtEName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="16dp" />
+
+
+    <TextView
+        style="@style/custom_text_view"
+        android:text="Ngày sinh" />
+
+    <EditText
+        android:id="@+id/edtEDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="16dp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Địa chỉ"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/edtEAdDress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Số điện thoại"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/edtEPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="16dp" />
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/edtEStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:checked="false"
+        android:text="Trạng thái"
+        android:theme="@style/SCBSwitch" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Quyền"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+
+            android:id="@+id/radio_Euser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:checked="true"
+            android:text="Nhân Viên" />
+
+        <RadioButton
+            android:id="@+id/radio_Eadmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnCancelProfile"
+        style="@style/custom_button_2"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_button_2"
+        android:text="Trở lại"
+        android:textColor="@drawable/custom_button_2"
+        android:textSize="16sp" />
+</LinearLayout>

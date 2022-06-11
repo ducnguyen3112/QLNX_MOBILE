@@ -16,6 +16,7 @@ import com.example.quanlynhapxuat.utils.Constants;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +25,7 @@ import retrofit2.Response;
 public class EmployeesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ArrayList<Employee> list = new ArrayList<>();
+    private List<Employee> list;
     private EmployeetRecyclerViewAdapter mAdapter;
     FloatingActionButton floatingActionButton;
 
@@ -43,9 +44,9 @@ public class EmployeesActivity extends AppCompatActivity {
     }
 
     public void getEmployees() {
-        ApiUtils.employeeRetrofit().getEmployees().enqueue(new Callback<ArrayList<Employee>>() {
+        ApiUtils.employeeRetrofit().getEmployees().enqueue(new Callback<List<Employee>>() {
             @Override
-            public void onResponse(Call<ArrayList<Employee>> call, Response<ArrayList<Employee>> response) {
+            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
                 if (response.isSuccessful()) {
                     list = response.body();
                     mAdapter = new EmployeetRecyclerViewAdapter(EmployeesActivity.this, list);
@@ -58,7 +59,7 @@ public class EmployeesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Employee>> call, Throwable t) {
+            public void onFailure(Call<List<Employee>> call, Throwable t) {
             }
         });
     }

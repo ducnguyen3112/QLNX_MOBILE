@@ -60,6 +60,7 @@ public class AddExportFragment extends Fragment {
     private int maSKH;
     private int maSP;
     private int maPX;
+    ChiTietPXAdapter chiTietPXAdapter;
     List<DeliveryDocketDetail> deliveryDocketDetails;
 
     private Spinner spDialogSP;
@@ -72,6 +73,7 @@ public class AddExportFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ChiTietPXAdapter.status=1;
         deliveryDocketDetails=new ArrayList<>();
         productList=new ArrayList<>();
         ApiUtils.getKhachHangService().getAllKH().enqueue(new Callback<List<KhachHang>>() {
@@ -87,10 +89,8 @@ public class AddExportFragment extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             maSKH=khachHangList.get(position).getId();
                         }
-
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
-
                         }
                     });
                 }
@@ -118,53 +118,59 @@ public class AddExportFragment extends Fragment {
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeliveryDocketService.deliveryDocketService.addDeliveryDocket(new DeliveryDocket(1,maSKH,1,Convert.dateToString(new Date())))
-                        .enqueue(new Callback<DeliveryDocket>() {
-                    @Override
-                    public void onResponse(Call<DeliveryDocket> call, Response<DeliveryDocket> response) {
-                        if (response.isSuccessful()){
-                            Log.e("addpx", "thêm thành công"+maSKH );
-                        }else{
-                            Log.e("addpx", "không thành công!!!!");
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<DeliveryDocket> call, Throwable t) {
-                    }
-                });
-            }
-        });
-        btnThemSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 DeliveryDocketService.deliveryDocketService.addDeliveryDocket(new DeliveryDocket(LoginActivity.idLogin,maSKH,1,Convert.dateToString(new Date())))
                         .enqueue(new Callback<DeliveryDocket>() {
                             @Override
                             public void onResponse(Call<DeliveryDocket> call, Response<DeliveryDocket> response) {
                                 if (response.isSuccessful()){
-                                    DeliveryDocket docket= response.body();
+                                    Log.e("addpx", "thêm thành công"+maSKH );
+                                    DeliveryDocket docket=response.body();
                                     maPX=docket.getId();
-                                    Toast.makeText(mainActivity,"mapx: "+maPX,
+                                    for (DeliveryDocketDetail item :
+                                            deliveryDocketDetails) {
+                                        item.setDeliveryDocketId(maPX);
+                                        DeliveryDocketDetailService.deliveryDocketService.addDeliveryDocketDetail(item).enqueue(new Callback<DeliveryDocketDetail>() {
+                                            @Override
+                                            public void onResponse(Call<DeliveryDocketDetail> call, Response<DeliveryDocketDetail> response) {
+                                                if (response.isSuccessful()){
+                                                    DeliveryDocketDetail d=response.body();
+
+                                                }
+                                            }
+                                            @Override
+                                            public void onFailure(Call<DeliveryDocketDetail> call, Throwable t) {
+                                                Toast.makeText(mainActivity,"không thành công detail"+t.getMessage(),
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                    Toast.makeText(mainActivity,"Tạo phiếu xuất thành công!",
                                             Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Log.e("addpx", "không thành công!!!!");
                                 }
                             }
-
                             @Override
                             public void onFailure(Call<DeliveryDocket> call, Throwable t) {
-
+                                Toast.makeText(mainActivity,"không thành công"+t.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
                             }
                         });
+            }
+        });
+        btnThemSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Dialog dialog=getDialogDDH(mainActivity);
                 dialog.show();
                 dialog.getWindow().setLayout((6*MainActivity.width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
-
             }
         });
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mainActivity);
         recyclerView.setLayoutManager(linearLayoutManager);
         RecyclerView.ItemDecoration itemDecoration=new DividerItemDecoration(mainActivity,DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
-        ChiTietPXAdapter chiTietPXAdapter=new ChiTietPXAdapter();
+        chiTietPXAdapter=new ChiTietPXAdapter();
         chiTietPXAdapter.setData(deliveryDocketDetails,mainActivity);
         recyclerView.setAdapter(chiTietPXAdapter);
         return mView;
@@ -186,26 +192,11 @@ public class AddExportFragment extends Fragment {
                         Integer.parseInt(etDialogGia.getText().toString()),
                         maSP,maPX
                 );
-                DeliveryDocketDetailService.deliveryDocketService.addDeliveryDocketDetail(deliveryDocketDetail).enqueue(new Callback<DeliveryDocketDetail>() {
-                    @Override
-                    public void onResponse(Call<DeliveryDocketDetail> call, Response<DeliveryDocketDetail> response) {
-                        if (response.isSuccessful()){
-                            DeliveryDocketDetail docketDetail=response.body();
-                            deliveryDocketDetails.add(docketDetail);
-                        }else{
-                            Toast.makeText(mainActivity,"Kkhoong thành công!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<DeliveryDocketDetail> call, Throwable t) {
-                        Toast.makeText(mainActivity,"lỗi server!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
+                Log.e("DETAILS", deliveryDocketDetail.toString() );
+                deliveryDocketDetails.add(deliveryDocketDetail);
+                Toast.makeText(mainActivity,"Thêm sp thành công:"+deliveryDocketDetails.size(),
+                        Toast.LENGTH_SHORT).show();
+                chiTietPXAdapter.notifyDataSetChanged();
                 dialog.cancel();
             }
         });
@@ -223,7 +214,7 @@ public class AddExportFragment extends Fragment {
                     productList=response.body();
                     SPSpinnerAdapter spinnerAdapter=new SPSpinnerAdapter(mainActivity,productList);
                     spDialogSP.setAdapter(spinnerAdapter);
-                    spDialogSP.setDropDownVerticalOffset(150);
+                    spDialogSP.setDropDownVerticalOffset(200);
                     spDialogSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
