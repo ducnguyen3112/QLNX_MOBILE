@@ -7,12 +7,84 @@
     android:orientation="vertical"
     tools:context=".fragment.ProductFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
-        app:title="Danh sách sản phẩm"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="start|center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SẢN PHẨM"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="end|center">
+
+                <ImageButton
+                    android:id="@+id/ibFilter_fragmentProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/actionbarOpacity"
+                    android:src="@drawable/ic_baseline_search_24" />
+
+                <ImageButton
+                    android:id="@+id/ibSort_fragmentProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/actionbarOpacity"
+                    android:src="@drawable/ic_baseline_swap_vert_24" />
+
+                <ImageButton
+                    android:id="@+id/ibMore_fragmentProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/actionbarOpacity"
+                    android:src="@drawable/ic_baseline_more_vert_24" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|end">
+
+            <TextView
+                android:id="@+id/tvTotal_fragmentProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="369"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/blueLight" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="sản phẩm"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
