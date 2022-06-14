@@ -1,6 +1,8 @@
 package com.example.quanlynhapxuat.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.quanlynhapxuat.R;
+import com.example.quanlynhapxuat.activity.product.EditProductActivity;
+import com.example.quanlynhapxuat.activity.product.NewProductActivity;
 import com.example.quanlynhapxuat.model.Product;
 import com.example.quanlynhapxuat.model.Product2;
 
@@ -50,11 +55,24 @@ public class ProductFragmentAdapter extends RecyclerView.Adapter<ProductFragment
         else {
             holder.swTrangThai.setChecked(false);
         }
+        if(product.getImage()!=null) {
+            Glide.with(context).load(product.getImage()).circleCrop().into(holder.ivAnhSP);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //
+                Intent intent = new Intent(context, EditProductActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",product.getId());
+                bundle.putString("name",product.getName());
+                bundle.putString("createAt",product.getCreatedAt());
+                bundle.putInt("status",product.getStatus());
+                bundle.putString("image",product.getImage());
+                bundle.putFloat("price",product.getPrice());
+                bundle.putInt("inventory",product.getInventory());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }

@@ -19,7 +19,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            app:tint="#3F51B5"
             app:srcCompat="@drawable/ic_box_nav" />
 
         <LinearLayout

@@ -92,7 +92,7 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
             holder.tvTenSP.setText(product.getName());
             holder.tvSL.setText(rdd.getQuantity()+"");
             holder.tvDonGia.setText(rdd.getPrice()+" VND");
-            if(product.getImage()!=null && !product.getImage().equals("")) {
+            if(product.getImage()!=null) {
                 Glide.with(context).load(product.getImage()).into(holder.ivAnhSP);
             }
         }

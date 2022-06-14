@@ -12,6 +12,16 @@ public class Product2 {
     public Product2() {
     }
 
+    public Product2(int id, String name, String createdAt, int status, String image, float price, int inventory) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.image = image;
+        this.price = price;
+        this.inventory = inventory;
+    }
+
     public int getId() {
         return id;
     }

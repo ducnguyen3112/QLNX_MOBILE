@@ -26,6 +26,12 @@ public class Convert {
         DecimalFormat formatter = new DecimalFormat("###,###,###,###");
         return formatter.format(value);
     }
+
+    public static String currencyFormat(float value){
+        DecimalFormat formatter = new DecimalFormat("###,###,###,###");
+        return formatter.format((int) value);
+    }
+
     public static Map<Integer,String> customerMap(){
         Map<Integer,String> customerMap=new HashMap<>();
 

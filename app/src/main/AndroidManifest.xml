@@ -20,10 +20,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".activity.product.EditProductActivity"
+            android:exported="false"
+            android:label="Thông Tin Sản Phẩm"/>
+        <activity
             android:name=".activity.product.NewProductActivity"
             android:exported="false"
             android:label="Tạo Sản Phẩm"
-            android:parentActivityName=".activity.main.MainActivity"/>
+            android:parentActivityName=".activity.main.MainActivity" />
         <activity
             android:name=".activity.Employee.ProfileEmployeeActivity"
             android:exported="false"

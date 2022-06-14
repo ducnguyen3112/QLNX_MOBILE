@@ -245,6 +245,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         DisplayMetrics metrics=getResources().getDisplayMetrics();
         alertDialog.getWindow().setLayout((7*metrics.widthPixels)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.setCancelable(false);
         alertDialog.show();
 
         alertDialog.setMessage("Nếu thoát những Thay đổi/Thêm mới sẽ không được lưu!\nVẫn thoát?");

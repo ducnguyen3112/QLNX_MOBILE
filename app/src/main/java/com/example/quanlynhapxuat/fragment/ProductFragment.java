@@ -55,7 +55,7 @@ public class ProductFragment extends Fragment {
 
         //showProducts
         rcvProducts.setLayoutManager(new LinearLayoutManager((MainActivity) getActivity()));
-        adapter = new ProductFragmentAdapter((MainActivity) getActivity());
+        adapter = new ProductFragmentAdapter((MainActivity) getContext());
         getProducts();
         //rcvProducts.setAdapter(adapter);
 
