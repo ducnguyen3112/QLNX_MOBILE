@@ -57,6 +57,7 @@ public class ImportFragment extends Fragment {
         //get&showList
         receivedDocketAdapter = new ReceivedDocketAdapter(getActivity());
         rcvListPhieuNhap.setLayoutManager(new LinearLayoutManager(getActivity()));
+        capNhatDuLieu();
         rcvListPhieuNhap.setAdapter(receivedDocketAdapter);
 
         //setEvent
@@ -65,8 +66,6 @@ public class ImportFragment extends Fragment {
             intent.putExtra("maPN", 0); //mã phiếu nhập 0 là thêm mới
             startActivity(intent);
         });
-
-        capNhatDuLieu();
 
         return view;
     }
@@ -87,7 +86,7 @@ public class ImportFragment extends Fragment {
                 if(response.isSuccessful()) {
                     receivedDocketList = response.body();
                     if(receivedDocketList==null) {
-                        CustomToast.makeText(getContext(),"Danh sách phiếu nhập rỗng!"
+                        CustomToast.makeText((MainActivity) getActivity(),"Danh sách phiếu nhập rỗng!"
                                 ,CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
                     }
                 }
@@ -95,11 +94,11 @@ public class ImportFragment extends Fragment {
                     try {
                         Gson g = new Gson();
                         RestErrorResponse errorResponse = g.fromJson(response.errorBody().string(),RestErrorResponse.class);
-                        CustomToast.makeText(getContext(),"TRY: " + errorResponse.getMessage()
+                        CustomToast.makeText((MainActivity) getActivity(),"TRY: " + errorResponse.getMessage()
                                 ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
                     }
                     catch (Exception e) {
-                        CustomToast.makeText(getContext(),"CATCH: " + e.getMessage()
+                        CustomToast.makeText((MainActivity) getActivity(),"CATCH: " + e.getMessage()
                                 ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
                     }
                 }
@@ -107,8 +106,6 @@ public class ImportFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ReceivedDocket>> call, Throwable t) {
-                CustomToast.makeText(getContext(),"CALL API FAIL!!!"
-                        ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
             }
         });
     }

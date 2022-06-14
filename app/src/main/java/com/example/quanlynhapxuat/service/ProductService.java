@@ -1,7 +1,9 @@
 package com.example.quanlynhapxuat.service;
 
 import com.example.quanlynhapxuat.model.Product;
+import com.example.quanlynhapxuat.model.Product2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -15,6 +17,9 @@ import retrofit2.http.Path;
 public interface ProductService {
     @GET("products")
     Call<List<Product>> getAllProduct();
+
+    @GET("products")
+    Call<ArrayList<Product2>> getProducts();
 
     @GET("products/{id}")
     Call<Product> getProductById(@Path("id") int i);

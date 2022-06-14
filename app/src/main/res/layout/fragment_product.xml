@@ -91,12 +91,12 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rcvProducts_fragmentProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/flbThemSP_fragmentProduct"
             style="@style/custom_floatingButton" />
     </RelativeLayout>
 </LinearLayout>

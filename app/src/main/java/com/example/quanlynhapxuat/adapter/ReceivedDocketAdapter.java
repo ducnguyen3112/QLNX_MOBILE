@@ -120,7 +120,8 @@ public class ReceivedDocketAdapter extends RecyclerView.Adapter<ReceivedDocketAd
 
     @Override
     public int getItemCount() {
-        return receivedDocketList==null ? 0 : receivedDocketList.size();
+        return receivedDocketList==null ?
+                0 : receivedDocketList.size();
     }
 
     public class ReceivedDocketViewHolder extends RecyclerView.ViewHolder {
