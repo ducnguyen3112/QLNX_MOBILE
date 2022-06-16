@@ -207,6 +207,7 @@ public class NewProductActivity extends AppCompatActivity {
                                     if(response.isSuccessful()) {
                                         CustomToast.makeText(NewProductActivity.this,"Thêm sản phẩm thành công!",
                                                 CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+
                                         Log.e("Yes image: ", "success");
 
                                     }

@@ -33,7 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductFragment extends Fragment {
-    private ProductFragmentAdapter adapter;
+    public ProductFragmentAdapter adapter;
     private ArrayList<Product2> products;
 
     private TextView tvTotal;
@@ -101,7 +101,7 @@ public class ProductFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Product2>> call, Throwable t) {
-                CustomToast.makeText(getContext(),"CALL API FAIL!!!"
+                CustomToast.makeText((MainActivity) getContext(),"CALL API FAIL!!!"
                         ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
             }
         });

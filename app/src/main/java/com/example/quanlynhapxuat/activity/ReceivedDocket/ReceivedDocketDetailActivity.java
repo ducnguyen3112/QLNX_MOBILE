@@ -25,6 +25,7 @@ import com.example.quanlynhapxuat.activity.main.LoginActivity;
 import com.example.quanlynhapxuat.adapter.ReceivedDocketDetailAdapter;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.Product;
+import com.example.quanlynhapxuat.model.Product2;
 import com.example.quanlynhapxuat.model.ReceivedDocket;
 import com.example.quanlynhapxuat.model.ReceivedDocketDetail;
 import com.example.quanlynhapxuat.model.RestErrorResponse;
@@ -154,7 +155,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                         ,CustomToast.LENGTH_LONG,CustomToast.WARNING).show();
             }
             else {
-                Product product = rddAdapter.getProduct(rddAdapter.getSelectedProductID());
+                Product2 product = rddAdapter.getProduct2(rddAdapter.getSelectedProductID());
 
                 ReceivedDocketDetail rdd = new ReceivedDocketDetail();
 
@@ -163,6 +164,8 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                 rdd.setReceivedDocketId(maPN);
                 rdd.setQuantity(Integer.parseInt(rddAdapter.etSL_dialogThemSP.getText().toString()));
                 rdd.setPrice(Integer.parseInt(rddAdapter.etDonGia_dialogThemSP.getText().toString()));
+
+                rdd.toString();
 
                 rddAdapter.addRDDList(rdd);
 
@@ -242,9 +245,9 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
 
     private void  huy() {
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        DisplayMetrics metrics=getResources().getDisplayMetrics();
-        alertDialog.getWindow().setLayout((7*metrics.widthPixels)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+        //alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //DisplayMetrics metrics=getResources().getDisplayMetrics();
+        //alertDialog.getWindow().setLayout((7*metrics.widthPixels)/8, WindowManager.LayoutParams.WRAP_CONTENT);
         alertDialog.setCancelable(false);
         alertDialog.show();
 
@@ -348,19 +351,17 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ReceivedDocketDetail> call, Response<ReceivedDocketDetail> response) {
                 if(response.isSuccessful()) {
                     Log.e("postRDD","SUCCESSFUL");
+                    //update product.inventory
+                    //putProduct(item);
                 }
                 else {
                     try {
                         Gson g = new Gson();
                         RestErrorResponse errorResponse = g.fromJson(response.errorBody().string(),RestErrorResponse.class);
-                        CustomToast.makeText(ReceivedDocketDetailActivity.this,"TRY: " + errorResponse.getMessage()
-                                ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
-                        Log.e("error",errorResponse.getMessage());
+                        Log.e("TRY: ",errorResponse.getMessage());
                     }
                     catch (Exception e) {
-                        CustomToast.makeText(ReceivedDocketDetailActivity.this,"CATCH: " + e.getMessage()
-                                ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
-                        Log.e("error", e.getMessage());
+                        Log.e("CATCH: ", e.getMessage());
                     }
                 }
             }
@@ -409,5 +410,45 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         capNhatDuLieu();
+    }
+
+    private void putProduct(ReceivedDocketDetail item) {
+        ApiUtils.getProductService().getProduct(item.getProductId()).enqueue(new Callback<Product2>() {
+            @Override
+            public void onResponse(Call<Product2> call, Response<Product2> response) {
+                if(response.isSuccessful()) {
+                    Product2 product2 = response.body();
+                    int a = product2.getInventory()+item.getQuantity();
+                    Log.e("a",a+"");
+                    product2.setInventory(a);
+                    product2.setPrice(item.getPrice());
+                    ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
+                        @Override
+                        public void onResponse(Call<Product2> call, Response<Product2> response) {
+                            if(response.isSuccessful()) {
+                                Product2 product21 = response.body();
+                                Log.e("edit inventory",product21.toString());
+                            }
+                            else {
+                                Log.e("edit inventory","failed");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Product2> call, Throwable t) {
+                            Log.e("edit inventory","CALL API FAIL");
+                        }
+                    });
+                }
+                else {
+                    Log.e("edit inventory: get product","failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product2> call, Throwable t) {
+                Log.e("edit inventory: get product","CALL API FAIL");
+            }
+        });
     }
 }

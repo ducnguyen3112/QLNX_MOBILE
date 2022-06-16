@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.example.quanlynhapxuat.R;
 import com.example.quanlynhapxuat.activity.ReceivedDocket.ReceivedDocketDetailActivity;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.Product;
+import com.example.quanlynhapxuat.model.Product2;
 import com.example.quanlynhapxuat.model.ReceivedDocketDetail;
 import com.example.quanlynhapxuat.model.RestErrorResponse;
 import com.example.quanlynhapxuat.utils.CustomAlertDialog;
@@ -33,6 +35,7 @@ import com.google.gson.Gson;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -44,6 +47,7 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
     private ArrayList<ReceivedDocketDetail> rddList;
 
     public ArrayList<Product> productList;
+
     public SPSpinnerAdapter spSpinnerAdapter;
     public Spinner spinSP_dialogThemSP;
     public EditText etSL_dialogThemSP, etDonGia_dialogThemSP;
@@ -199,7 +203,14 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 if(response.isSuccessful()) {
-                    productList = response.body();
+                    if (productList==null) {
+                        productList = new ArrayList<>();
+                    }
+                    for(Product item : response.body()) {
+                        if (item.getStatus()==1) {
+                            productList.add(item);
+                        }
+                    }
                 }
                 else {
                     try {
@@ -221,6 +232,23 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
                         ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
             }
         });
+    }
+
+    public Product2 getProduct2(int productId) {
+        ArrayList<Product2> list = new ArrayList<>();
+        for(Product item : productList) {
+            if(item.getStatus()==1) {
+                Product2 p = new Product2(item.getId(),item.getName(),item.getStatus(),item.getImage(),item.getCreated_at());
+                Log.e("p",p.toString());
+                list.add(p);
+            }
+        }
+        for(Product2 item : list) {
+            if(item.getId()==productId) {
+                return item;
+            }
+        }
+        return null;
     }
 
     public Product getProduct(int productId) {
@@ -252,6 +280,7 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedProductID = productList.get(i).getId();
+                Log.e("productList.get(i).getId()",productList.get(i).getId()+"");
             }
 
             @Override

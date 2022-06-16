@@ -22,6 +22,9 @@ public interface ProductService {
     Call<ArrayList<Product2>> getProducts();
 
     @GET("products/{id}")
+    Call<Product2> getProduct(@Path("id") int i);
+
+    @GET("products/{id}")
     Call<Product> getProductById(@Path("id") int i);
 
     @POST("products")

@@ -31,6 +31,17 @@ public class Product {
         this.createdAt = created_at;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", image='" + image + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

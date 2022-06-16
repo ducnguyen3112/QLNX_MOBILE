@@ -142,64 +142,64 @@ public class EditProductActivity extends AppCompatActivity {
                 else {
                     product2.setStatus(0);
                 }
-            }
-            if(mUri!=null) {
-                String strReadPath = RealPathUtil.getRealPath(EditProductActivity.this, mUri);
-                File file = new File(strReadPath);
-                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-                ApiUtils.getUploadService().uploadImage(body).enqueue(new Callback<Message>() {
-                    @Override
-                    public void onResponse(Call<Message> call, Response<Message> response) {
-                        if(response.isSuccessful()) {
-                            Message message = response.body();
-                            product2.setImage(message.getMessage());
+                if(mUri!=null) {
+                    String strReadPath = RealPathUtil.getRealPath(EditProductActivity.this, mUri);
+                    File file = new File(strReadPath);
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                    MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+                    ApiUtils.getUploadService().uploadImage(body).enqueue(new Callback<Message>() {
+                        @Override
+                        public void onResponse(Call<Message> call, Response<Message> response) {
+                            if(response.isSuccessful()) {
+                                Message message = response.body();
+                                product2.setImage(message.getMessage());
 
-                            ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
-                                @Override
-                                public void onResponse(Call<Product2> call, Response<Product2> response) {
-                                    if(response.isSuccessful()) {
-                                        CustomToast.makeText(EditProductActivity.this,"Cập nhật thành công!",
-                                                CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
-                                        Log.e("Yes image: ", "success");
+                                ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
+                                    @Override
+                                    public void onResponse(Call<Product2> call, Response<Product2> response) {
+                                        if(response.isSuccessful()) {
+                                            CustomToast.makeText(EditProductActivity.this,"Cập nhật thành công!",
+                                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+                                            Log.e("Yes image: ", "success");
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onFailure(Call<Product2> call, Throwable t) {
-                                    CustomToast.makeText(EditProductActivity.this,"CALL API FAILED!",
-                                            CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
-                                }
-                            });
+                                    @Override
+                                    public void onFailure(Call<Product2> call, Throwable t) {
+                                        CustomToast.makeText(EditProductActivity.this,"CALL API FAILED!",
+                                                CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
+                                    }
+                                });
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Message> call, Throwable t) {
-                        CustomToast.makeText(EditProductActivity.this,"CALL API FAILED!",
-                                CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
-                    }
-                });
-            }
-            else {
-                ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
-                    @Override
-                    public void onResponse(Call<Product2> call, Response<Product2> response) {
-                        if(response.isSuccessful()) {
-                            CustomToast.makeText(EditProductActivity.this,"Cập nhật thành công!",
-                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
-                            Log.e("Yes image: ", "success");
+                        @Override
+                        public void onFailure(Call<Message> call, Throwable t) {
+                            CustomToast.makeText(EditProductActivity.this,"CALL API FAILED!",
+                                    CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                         }
-                    }
+                    });
+                }
+                else {
+                    ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
+                        @Override
+                        public void onResponse(Call<Product2> call, Response<Product2> response) {
+                            if(response.isSuccessful()) {
+                                CustomToast.makeText(EditProductActivity.this,"Cập nhật thành công!",
+                                        CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+                                Log.e("Yes image: ", "success");
+                            }
+                        }
 
-                    @Override
-                    public void onFailure(Call<Product2> call, Throwable t) {
-                        CustomToast.makeText(EditProductActivity.this,"CALL API FAILED!",
-                                CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Product2> call, Throwable t) {
+                            CustomToast.makeText(EditProductActivity.this,"CALL API FAILED!",
+                                    CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
+                        }
+                    });
+                }
+                finish();
             }
-            finish();
         });
     }
 

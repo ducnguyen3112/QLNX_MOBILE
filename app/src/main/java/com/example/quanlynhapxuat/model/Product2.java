@@ -22,6 +22,14 @@ public class Product2 {
         this.inventory = inventory;
     }
 
+    public Product2(int id, String name, int status, String image, String createdAt) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.image = image;
+    }
+
     public int getId() {
         return id;
     }
@@ -76,5 +84,18 @@ public class Product2 {
 
     public void setInventory(int inventory) {
         this.inventory = inventory;
+    }
+
+    @Override
+    public String toString() {
+        return "Product2{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", status=" + status +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", inventory=" + inventory +
+                '}';
     }
 }
