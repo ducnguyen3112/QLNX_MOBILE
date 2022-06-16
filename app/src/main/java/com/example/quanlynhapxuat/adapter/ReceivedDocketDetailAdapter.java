@@ -46,6 +46,8 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
     private Context context;
     private ArrayList<ReceivedDocketDetail> rddList;
 
+    private ArrayList<ReceivedDocketDetail> rddListOld;
+
     public ArrayList<Product> productList;
 
     public SPSpinnerAdapter spSpinnerAdapter;
@@ -67,8 +69,13 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
         return productList;
     }
 
+    public ArrayList<ReceivedDocketDetail> getRddListOld() {
+        return rddListOld;
+    }
+
     public void setRddList(ArrayList<ReceivedDocketDetail> rddList) {
         this.rddList = rddList;
+        this.rddListOld = rddList;
         notifyDataSetChanged();
     }
 

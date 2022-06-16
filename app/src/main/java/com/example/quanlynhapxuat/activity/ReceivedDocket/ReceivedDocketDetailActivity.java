@@ -199,6 +199,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                 public void onResponse(Call<ReceivedDocket> call, Response<ReceivedDocket> response) {
                     if(response.isSuccessful()) {
                         Log.e("postRD: ","Thêm phiếu nhập thành công!");
+                        deleteInventotyInOldRDD();
                         for(ReceivedDocketDetail item : rddAdapter.getRddList()) {
                             item.setReceivedDocketId(response.body().getId());
                             Log.e("item.setReceivedDocketId: ",item.getReceivedDocketId()+"");
@@ -232,6 +233,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
             });
         }
         else {
+            deleteInventotyInOldRDD();
             for(ReceivedDocketDetail item : rddAdapter.getRddList()) {
                 if(item.getId()==0) {
                     postReceivedDocketDetail(item);
@@ -380,6 +382,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ReceivedDocketDetail> call, Response<ReceivedDocketDetail> response) {
                 if(response.isSuccessful()) {
                     Log.e("putRDD","SUCCESSFUL");
+                    putProduct(item);
                 }
                 else {
                     try {
@@ -450,5 +453,44 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                 Log.e("edit inventory: get product","CALL API FAIL");
             }
         });
+    }
+
+    private void deleteInventotyInOldRDD() {
+        if(rddAdapter.getRddListOld()==null) {
+            return;
+        }
+        for(ReceivedDocketDetail item : rddAdapter.getRddListOld()) {
+            ApiUtils.getProductService().getProduct(item.getProductId()).enqueue(new Callback<Product2>() {
+                @Override
+                public void onResponse(Call<Product2> call, Response<Product2> response) {
+                    if(response.isSuccessful()) {
+                        Product2 product2 = response.body();
+                        int a = product2.getInventory()-item.getQuantity();
+                        ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
+                            @Override
+                            public void onResponse(Call<Product2> call, Response<Product2> response) {
+                                if(response.isSuccessful()) {
+                                    Product2 product21 = response.body();
+                                    Log.e("deleteInventotyInOldRDD",product21.toString());
+                                }
+                                else {
+                                    Log.e("deleteInventotyInOldRDD","failed");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Product2> call, Throwable t) {
+                                Log.e("deleteInventotyInOldRDD","CALL API FAIL");
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Product2> call, Throwable t) {
+                    Log.e("deleteInventotyInOldRDD: get product","CALL API FAIL");
+                }
+            });
+        }
     }
 }
