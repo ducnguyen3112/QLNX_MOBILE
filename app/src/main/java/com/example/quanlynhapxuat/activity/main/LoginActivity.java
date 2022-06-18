@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText etPasswordLogin;
     public static int idLogin;
     public static String nameLogin;
+    public static String urlAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Employee employee=response.body();
                     idLogin=employee.getId();
                     nameLogin=employee.getFullName();
+                    urlAvatar=employee.getAvatar();
                     Toast.makeText(LoginActivity.this,"Đăng nhập thành công!",
                             Toast.LENGTH_SHORT).show();
                     Intent intent1=new Intent(LoginActivity.this,MainActivity.class);

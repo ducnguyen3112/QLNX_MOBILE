@@ -33,7 +33,6 @@ import com.example.quanlynhapxuat.model.DeliveryDocket;
 import com.example.quanlynhapxuat.model.DeliveryDocketDetail;
 import com.example.quanlynhapxuat.model.KhachHang;
 import com.example.quanlynhapxuat.model.Product;
-import com.example.quanlynhapxuat.model.RestErrorResponse;
 import com.example.quanlynhapxuat.service.DeliveryDocketDetailService;
 import com.example.quanlynhapxuat.service.DeliveryDocketService;
 import com.example.quanlynhapxuat.utils.Convert;
@@ -42,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -118,6 +118,11 @@ public class AddExportFragment extends Fragment {
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (deliveryDocketDetails.size()==0){
+                    Toast.makeText(mainActivity,"Danh sách sản phẩm trong phiếu xuất trống! Không thể lưu phiếu xuất!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 DeliveryDocketService.deliveryDocketService.addDeliveryDocket(new DeliveryDocket(LoginActivity.idLogin,maSKH,1,Convert.dateToString(new Date())))
                         .enqueue(new Callback<DeliveryDocket>() {
                             @Override
@@ -134,6 +139,9 @@ public class AddExportFragment extends Fragment {
                                             public void onResponse(Call<DeliveryDocketDetail> call, Response<DeliveryDocketDetail> response) {
                                                 if (response.isSuccessful()){
                                                     DeliveryDocketDetail d=response.body();
+                                                    Log.e("addpx", "ma chi tiet: " +d.getId() );
+                                                }else{
+                                                    Log.e("addpx", response.message() );
 
                                                 }
                                             }
@@ -146,6 +154,7 @@ public class AddExportFragment extends Fragment {
                                     }
                                     Toast.makeText(mainActivity,"Tạo phiếu xuất thành công!",
                                             Toast.LENGTH_SHORT).show();
+                                    getParentFragmentManager().popBackStack();
                                 }else{
                                     Log.e("addpx", "không thành công!!!!");
                                 }
@@ -156,7 +165,9 @@ public class AddExportFragment extends Fragment {
                                         Toast.LENGTH_SHORT).show();
                             }
                         });
+
             }
+
         });
         btnThemSP.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,12 +4,6 @@
         android:id="@+id/menupx_hoanthanh"
         android:title="Hoàn thành"/>
     <item
-        android:id="@+id/menupx_sua"
-        android:title="Sửa"/>
-    <item
-        android:id="@+id/menupx_xuatfile"
-        android:title="Xuất file (PDF)"/>
-    <item
         android:id="@+id/menupx_huy"
         android:title="Hủy phiếu xuất"/>
 

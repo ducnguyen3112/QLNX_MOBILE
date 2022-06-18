@@ -85,13 +85,15 @@ public class ExportDetailFragment extends Fragment {
                     tvStatus.setText("Đang xử lí");
                 }else if(deliveryDocket.getStatus()==2){
                     tvStatus.setText("Hoàn thành");
+                    tvStatus.setTextColor(Color.parseColor("#28A745"));
                 }else if(deliveryDocket.getStatus()==0) {
                     tvStatus.setText("Đã hủy");
+                    tvStatus.setTextColor(Color.parseColor("#C82333"));
                 }
                 int tong=0;
                 for (DeliveryDocketDetail item :
                         deliveryDocketDetails) {
-                    tong+=item.getPrice();
+                    tong+=item.getPrice()*item.getQuantity();
                 }
                 tvTongTien.setText(Convert.currencyFormat(tong));
                 tvGiamGia.setText(String.valueOf(0));
@@ -123,10 +125,10 @@ public class ExportDetailFragment extends Fragment {
                 getParentFragmentManager().popBackStack();
             }
         });
-        showPopUpMenu(deliveryDocket.getId());
+        showPopUpMenu(deliveryDocket.getId(),deliveryDocket.getStatus());
         return mView;
     }
-    public void showPopUpMenu(int docketId){
+    public void showPopUpMenu(int docketId,int status){
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,19 +138,25 @@ public class ExportDetailFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
-                            case R.id.menupx_sua:
-                                Toast.makeText(mainActivity,"Sửa",
-                                        Toast.LENGTH_SHORT).show();
-                                return true;
-                            case R.id.menupx_xuatfile:
-                                Toast.makeText(mainActivity,"Xuất file",
-                                        Toast.LENGTH_SHORT).show();
-                                return true;
                             case R.id.menupx_hoanthanh:
-                                hoanThanhDonHang(docketId);
+                                if (status==2){
+                                    Toast.makeText(mainActivity,"Đơn hàng đã hoàn thành!",
+                                            Toast.LENGTH_SHORT).show();
+                                }else{
+                                    hoanThanhDonHang(docketId);
+                                }
+
                                 return true;
                             case R.id.menupx_huy:
+                                if (status==2){
+                                    Toast.makeText(mainActivity,"Đơn hàng đã hoàn thành không được hủy!",
+                                            Toast.LENGTH_SHORT).show();
+                                }else if (status==0){
+                                Toast.makeText(mainActivity,"Đơn hàng đã được hủy trước đó!",
+                                        Toast.LENGTH_SHORT).show();
+                                }else{
                                 huyDonHang(docketId);
+                                }
                                 return true;
                             default:return false;
                         }

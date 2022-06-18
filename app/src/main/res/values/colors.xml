@@ -26,4 +26,7 @@
     <color name="dialogBackColor">#0091C2</color>
 
     <color name="fragmentBackColor">#E4E4E4</color>
+
+    <color name="success">#2C693A</color>
+    <color name="cancel">#721C24</color>
 </resources>
