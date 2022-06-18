@@ -31,6 +31,7 @@ import com.example.quanlynhapxuat.model.ReceivedDocketDetail;
 import com.example.quanlynhapxuat.model.RestErrorResponse;
 import com.example.quanlynhapxuat.utils.CustomAlertDialog;
 import com.example.quanlynhapxuat.utils.CustomToast;
+import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 
 import java.text.NumberFormat;
@@ -73,10 +74,14 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
         return rddListOld;
     }
 
-    public void setRddList(ArrayList<ReceivedDocketDetail> rddList) {
-        this.rddList = rddList;
-        this.rddListOld = rddList;
+    public void setRddList(ArrayList<ReceivedDocketDetail> list) {
+        this.rddList = list;
+//        this.rddListOld = list;
         notifyDataSetChanged();
+    }
+
+    public void setRddListOld(ArrayList<ReceivedDocketDetail> list) {
+        this.rddListOld = list;
     }
 
     public ArrayList<ReceivedDocketDetail> getRddList() {
@@ -133,7 +138,11 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
                             ,CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
                 }
                 else {
+                    Log.e(" rddList.get(position)", rddList.get(position).getQuantity()+"");
+                    Log.e(" rddListOld.get(position)", rddListOld.get(position).getQuantity()+"");
                     rddList.get(position).setQuantity(Integer.parseInt(etSL_dialogSuaSL.getText().toString()));
+                    Log.e(" rddList.get(position)", rddList.get(position).getQuantity()+"");
+                    Log.e(" rddListOld.get(position)", rddListOld.get(position).getQuantity()+"");
                     dialog.cancel();
                     ((ReceivedDocketDetailActivity)context).onResume();
                 }
@@ -154,10 +163,14 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
             alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.e("ibDelete","rddList.size "+rddList.size());
+                    Log.e("ibDelete","rddListOld.size "+rddListOld.size());
+                    Log.e("ibDelete","");
                     rddList.remove(rdd);
+                    Log.e("ibDelete","rddList.size "+rddList.size());
+                    Log.e("ibDelete","rddListOld.size "+rddListOld.size());
                     ((ReceivedDocketDetailActivity)context).onResume();
                     alertDialog.cancel();
-
                 }
             });
 
@@ -333,5 +346,66 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
         btnOK_dialogSuaSL = dialog.findViewById(R.id.btnOK_dialogSuaSL);
 
         return dialog;
+    }
+
+    public void deleteOldRDDList() {
+        if(rddListOld==null) {
+            return;
+        }
+        for(ReceivedDocketDetail item : rddListOld) {
+            ApiUtils.getReceivedDocketService().deleteReceivedDocketDetail(item.getId()).enqueue(new Callback<ReceivedDocketDetail>() {
+                @Override
+                public void onResponse(Call<ReceivedDocketDetail> call, Response<ReceivedDocketDetail> response) {
+                    if(response.isSuccessful()) {
+                        Log.e("deleteReceivedDocketDetail","success");
+                        Log.e("deleteReceivedDocketDetail",response.toString());
+                        Log.e("deleteReceivedDocketDetail","rddList.size() "+rddList.size());
+                        Log.e("deleteReceivedDocketDetail","rddListOld.size() "+rddListOld.size());
+                    }
+                    else {
+                        Log.e("deleteReceivedDocketDetail","successn't");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ReceivedDocketDetail> call, Throwable t) {
+                    Log.e("deleteReceivedDocketDetail","failed");
+                }
+            });
+            ApiUtils.getProductService().getProduct(item.getProductId()).enqueue(new Callback<Product2>() {
+                @Override
+                public void onResponse(Call<Product2> call, Response<Product2> response) {
+                    if(response.isSuccessful()) {
+                        Log.e("getProduct","success");
+                        Product2 p = response.body();
+                        p.setInventory(p.getInventory()-item.getQuantity());
+                        ApiUtils.getProductService().putProduct(p.getId(),p).enqueue(new Callback<Product2>() {
+                            @Override
+                            public void onResponse(Call<Product2> call, Response<Product2> response) {
+                                if(response.isSuccessful()) {
+                                    Log.e("putProduct","success");
+                                }
+                                else {
+                                    Log.e("putProduct","successn't");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Product2> call, Throwable t) {
+                                Log.e("putProduct","failed");
+                            }
+                        });
+                    }
+                    else {
+                        Log.e("getProduct","successn't");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Product2> call, Throwable t) {
+                    Log.e("getProduct","failed");
+                }
+            });
+        }
     }
 }

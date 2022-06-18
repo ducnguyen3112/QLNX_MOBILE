@@ -18,7 +18,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +25,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.quanlynhapxuat.R;
-import com.example.quanlynhapxuat.activity.Employee.AddEmployeeActivity;
-import com.example.quanlynhapxuat.activity.ReceivedDocket.ReceivedDocketDetailActivity;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.Message;
 import com.example.quanlynhapxuat.model.Product2;
@@ -36,18 +33,12 @@ import com.example.quanlynhapxuat.model.RestErrorResponse;
 import com.example.quanlynhapxuat.utils.Convert;
 import com.example.quanlynhapxuat.utils.CustomToast;
 import com.google.gson.Gson;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
-import gun0912.tedbottompicker.TedBottomPicker;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

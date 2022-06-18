@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -38,4 +39,7 @@ public interface ReceivedDocketService {
 
     @PUT("receivedDocketDetails/{id}")
     Call<ReceivedDocketDetail> putReceivedDocketDetail(@Path("id") int maCTPN, @Body ReceivedDocketDetail receivedDocketDetail);
+
+    @DELETE("receivedDocketDetails/{id}")
+    Call<ReceivedDocketDetail> deleteReceivedDocketDetail(@Path("id") int id);
 }

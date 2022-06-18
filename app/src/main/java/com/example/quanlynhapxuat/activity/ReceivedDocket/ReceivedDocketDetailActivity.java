@@ -24,18 +24,17 @@ import com.example.quanlynhapxuat.R;
 import com.example.quanlynhapxuat.activity.main.LoginActivity;
 import com.example.quanlynhapxuat.adapter.ReceivedDocketDetailAdapter;
 import com.example.quanlynhapxuat.api.ApiUtils;
-import com.example.quanlynhapxuat.model.Product;
 import com.example.quanlynhapxuat.model.Product2;
 import com.example.quanlynhapxuat.model.ReceivedDocket;
 import com.example.quanlynhapxuat.model.ReceivedDocketDetail;
 import com.example.quanlynhapxuat.model.RestErrorResponse;
+import com.example.quanlynhapxuat.utils.Convert;
 import com.example.quanlynhapxuat.utils.CustomAlertDialog;
 import com.example.quanlynhapxuat.utils.CustomToast;
 import com.google.gson.Gson;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -90,7 +89,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
             int maNV = LoginActivity.idLogin;
             tvMaPN.setText(maPN+"");
             tvMaNV.setText(maNV+"");
-            tvTongGiaTri.setText(NumberFormat.getNumberInstance(Locale.US).format(rddAdapter.getTotalList())+"VND");
+            tvTongGiaTri.setText(Convert.currencyFormat(rddAdapter.getTotalList())+" VND");
 
             receivedDocket = new ReceivedDocket();
         }
@@ -100,6 +99,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
             etNhaCungCap.setEnabled(false);
             ivDatePicker.setVisibility(View.GONE);
             getReceivedDocket(maPN);
+            getReceivedDocket2(maPN);
         }
 
         //setEvent
@@ -199,16 +199,17 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                     if(response.isSuccessful()) {
                         Log.e("postRD: ","Thêm phiếu nhập thành công!");
 
-                        deleteInventotyInOldRDD();
+//                        deleteInventotyInOldRDD();
                         for(ReceivedDocketDetail item : rddAdapter.getRddList()) {
                             item.setReceivedDocketId(response.body().getId());
                             Log.e("item.setReceivedDocketId: ",item.getReceivedDocketId()+"");
-                            if(item.getId()==0) {
-                                postReceivedDocketDetail(item);
-                            }
-                            else {
-                                putReceivedDocketDetail(item);
-                            }
+//                            if(item.getId()==0) {
+//                                postReceivedDocketDetail(item);
+//                            }
+//                            else {
+//                                putReceivedDocketDetail(item);
+//                            }
+                            postReceivedDocketDetail(item);
                         }
                     }
                     else {
@@ -233,23 +234,24 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
             });
         }
         else {
-            deleteInventotyInOldRDD();
+            rddAdapter.deleteOldRDDList();
             for(ReceivedDocketDetail item : rddAdapter.getRddList()) {
-                if(item.getId()==0) {
-                    postReceivedDocketDetail(item);
-                }
-                else {
-                    putReceivedDocketDetail(item);
-                }
+//                if(item.getId()==0) {
+//                    postReceivedDocketDetail(item);
+//                }
+//                else {
+//                    putReceivedDocketDetail(item);
+//                }
+                postReceivedDocketDetail(item);
             }
         }
     }
 
     private void  huy() {
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
-        //alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        //DisplayMetrics metrics=getResources().getDisplayMetrics();
-        //alertDialog.getWindow().setLayout((7*metrics.widthPixels)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        DisplayMetrics metrics=getResources().getDisplayMetrics();
+        alertDialog.getWindow().setLayout((7*metrics.widthPixels)/8, WindowManager.LayoutParams.WRAP_CONTENT);
         alertDialog.setCancelable(false);
         alertDialog.show();
 
@@ -260,6 +262,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
         alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alertDialog.cancel();
                 finish();
             }
         });
@@ -311,6 +314,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                     }
                     else {
                         rddAdapter.setRddList(rd.getReceivedDocketDetails());
+//                        rddAdapter.setRddListOld(rd.getReceivedDocketDetails());
                         tvTittle.setText("SỬA PHIẾU NHẬP");
                         tvMaPN.setText(rd.getId()+"");
                         tvMaNV.setText(rd.getEmployee_id()+"");
@@ -354,7 +358,34 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     Log.e("postRDD","SUCCESSFUL");
                     //update product.inventory
-                    //putProduct(item);
+                    ApiUtils.getProductService().getProduct(item.getProductId()).enqueue(new Callback<Product2>() {
+                        @Override
+                        public void onResponse(Call<Product2> call, Response<Product2> response) {
+                            if(response.isSuccessful()) {
+                                Product2 p = response.body();
+                                //p.setInventory(p.getInventory()+ item.getQuantity());
+                                p.setPrice(item.getPrice());
+                                ApiUtils.getProductService().putProduct(p.getId(),p).enqueue(new Callback<Product2>() {
+                                    @Override
+                                    public void onResponse(Call<Product2> call, Response<Product2> response) {
+                                        if(response.isSuccessful()) {
+                                            Log.e("postReceivedDocketDetail", "put prodcut success");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Product2> call, Throwable t) {
+                                        Log.e("postReceivedDocketDetail", "put prodcut failed");
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Product2> call, Throwable t) {
+                            Log.e("postReceivedDocketDetail", "get prodcut failed");
+                        }
+                    });
                 }
                 else {
                     try {
@@ -494,5 +525,33 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void getReceivedDocket2(int maPN) {
+        ApiUtils.getReceivedDocketService().getReceivedDocket(maPN).enqueue(new Callback<ReceivedDocket>() {
+            @Override
+            public void onResponse(Call<ReceivedDocket> call, Response<ReceivedDocket> response) {
+                if(response.isSuccessful()) {
+                    ReceivedDocket rd = response.body();
+                    rddAdapter.setRddListOld(rd.getReceivedDocketDetails());
+                }
+//                else {
+//                    try {
+//                        Gson g = new Gson();
+//                        RestErrorResponse errorResponse = g.fromJson(response.errorBody().string(),RestErrorResponse.class);
+//                        CustomToast.makeText(ReceivedDocketDetailActivity.this,"TRY: " + errorResponse.getMessage()
+//                                ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
+//                    }
+//                    catch (Exception e) {
+//                        CustomToast.makeText(ReceivedDocketDetailActivity.this,"CATCH: " + e.getMessage()
+//                                ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
+//                    }
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<ReceivedDocket> call, Throwable t) {
+            }
+        });
     }
 }

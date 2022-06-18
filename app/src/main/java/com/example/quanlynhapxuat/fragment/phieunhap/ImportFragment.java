@@ -7,12 +7,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.quanlynhapxuat.R;
 import com.example.quanlynhapxuat.activity.ReceivedDocket.ReceivedDocketDetailActivity;
@@ -20,13 +18,14 @@ import com.example.quanlynhapxuat.activity.main.MainActivity;
 import com.example.quanlynhapxuat.adapter.ReceivedDocketAdapter;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.ReceivedDocket;
-import com.example.quanlynhapxuat.model.ReceivedDocketDetail;
 import com.example.quanlynhapxuat.model.RestErrorResponse;
+import com.example.quanlynhapxuat.utils.Convert;
 import com.example.quanlynhapxuat.utils.CustomToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,8 +56,10 @@ public class ImportFragment extends Fragment {
         //get&showList
         receivedDocketAdapter = new ReceivedDocketAdapter(getActivity());
         rcvListPhieuNhap.setLayoutManager(new LinearLayoutManager(getActivity()));
-        capNhatDuLieu();
         rcvListPhieuNhap.setAdapter(receivedDocketAdapter);
+
+        capNhatDuLieu();
+
 
         //setEvent
         flbThemPhieuNhap.setOnClickListener(view1 -> {
@@ -72,11 +73,7 @@ public class ImportFragment extends Fragment {
 
     private void capNhatDuLieu() {
         getReceivedDocketList();
-        receivedDocketAdapter.setReceivedDocketList(receivedDocketList);
         receivedDocketAdapter.notifyDataSetChanged();
-
-        tvSLPhieuNhap.setText(receivedDocketAdapter.getItemCount()+"");
-        tvTotal.setText(receivedDocketAdapter.getTotalList()+"");
     }
 
     private void getReceivedDocketList() {
@@ -88,6 +85,13 @@ public class ImportFragment extends Fragment {
                     if(receivedDocketList==null) {
                         CustomToast.makeText((MainActivity) getActivity(),"Danh sách phiếu nhập rỗng!"
                                 ,CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+                    }
+                    else {
+                        Collections.reverse(receivedDocketList);
+                        receivedDocketAdapter.setReceivedDocketList(receivedDocketList);
+                        tvSLPhieuNhap.setText(receivedDocketAdapter.getItemCount()+"");
+                        tvTotal.setText(Convert.currencyFormat(receivedDocketAdapter.getTotalList())+" VND");
+
                     }
                 }
                 else {
@@ -108,5 +112,11 @@ public class ImportFragment extends Fragment {
             public void onFailure(Call<ArrayList<ReceivedDocket>> call, Throwable t) {
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        capNhatDuLieu();
     }
 }
