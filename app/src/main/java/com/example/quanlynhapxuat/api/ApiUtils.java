@@ -10,8 +10,8 @@ import com.example.quanlynhapxuat.service.UploadService;
 
 public class ApiUtils {
 
-    //public static final String baseURL = "http://10.200.0.157:8080/api/";
-    public static final String baseURL = "https://shoesstation.herokuapp.com/api/";
+    //public static final String baseURL = "http://10.200.0.157:8080/api/";0815311220
+    public static final String baseURL = "http://192.168.2.29:8080/api/";
 
     public static KhachHangService getKhachHangService() {
         return RetrofitClient.getClient(baseURL).create(KhachHangService.class);

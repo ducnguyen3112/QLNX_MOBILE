@@ -24,10 +24,10 @@ public interface DeliveryDocketService {
     Gson gson=new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
 
     DeliveryDocketService deliveryDocketService=new Retrofit.Builder()
-            //http://192.168.0.6:8080/api//
+            //http://192.168.0.6:8080/api//0457 894 562
             //https://shoesstation.herokuapp.com/api/
            // .baseUrl("https://shoesstation.herokuapp.com/api/")
-            .baseUrl("http://10.200.0.157:8080/api/")
+            .baseUrl("http://192.168.2.29:8080/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(DeliveryDocketService.class);

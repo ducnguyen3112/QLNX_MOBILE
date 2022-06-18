@@ -194,11 +194,11 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
 
         if(maPN==0) {
             ApiUtils.getReceivedDocketService().postReceivedDocket(receivedDocket).enqueue(new Callback<ReceivedDocket>() {
-
                 @Override
                 public void onResponse(Call<ReceivedDocket> call, Response<ReceivedDocket> response) {
                     if(response.isSuccessful()) {
                         Log.e("postRD: ","Thêm phiếu nhập thành công!");
+
                         deleteInventotyInOldRDD();
                         for(ReceivedDocketDetail item : rddAdapter.getRddList()) {
                             item.setReceivedDocketId(response.body().getId());
@@ -422,7 +422,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     Product2 product2 = response.body();
                     int a = product2.getInventory()+item.getQuantity();
-                    Log.e("a",a+"");
+                    Log.e("a putProduct",product2.getInventory()+"+"+item.getQuantity());
                     product2.setInventory(a);
                     product2.setPrice(item.getPrice());
                     ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
@@ -466,6 +466,8 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                     if(response.isSuccessful()) {
                         Product2 product2 = response.body();
                         int a = product2.getInventory()-item.getQuantity();
+                        Log.e("a delete",product2.getInventory()+"-"+item.getQuantity());
+                        product2.setInventory(a);
                         ApiUtils.getProductService().putProduct(product2.getId(),product2).enqueue(new Callback<Product2>() {
                             @Override
                             public void onResponse(Call<Product2> call, Response<Product2> response) {

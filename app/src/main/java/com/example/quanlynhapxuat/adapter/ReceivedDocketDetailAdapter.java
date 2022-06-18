@@ -259,9 +259,11 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
     }
 
     public Product getProduct(int productId) {
-        for(Product item : productList) {
-            if(item.getId()==productId) {
-                return item;
+        if(productList!=null) {
+            for(Product item : productList) {
+                if(item.getId()==productId) {
+                    return item;
+                }
             }
         }
         return null;
