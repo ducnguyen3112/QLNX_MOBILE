@@ -42,7 +42,7 @@ public class ChiTietPXAdapter extends RecyclerView.Adapter<ChiTietPXAdapter.ChiT
     private List<DeliveryDocketDetail> list;
     public static int status=0;
     List<Product> productList;
-    Map<Integer,String> productMap;
+    Map<Integer,Product> productMap;
 
 
     public void setData(List<DeliveryDocketDetail> list,Context context ) {
@@ -80,10 +80,13 @@ public class ChiTietPXAdapter extends RecyclerView.Adapter<ChiTietPXAdapter.ChiT
                     productList=response.body();
                     for (Product p :
                             productList) {
-                        productMap.put(p.getId(),p.getName());
+                        productMap.put(p.getId(),p);
 
                     }
-                    holder.tv_tensppx.setText(productMap.get(item.getProductId() ));
+                    holder.tv_tensppx.setText(productMap.get(item.getProductId()).getName());
+                    Glide.with(context)
+                            .load(productMap.get(item.getProductId()).getImage())
+                            .into(holder.ivSPPX);
                 }else{
                     Log.e("chitietpx", "khoong co product" );
                 }
@@ -98,9 +101,6 @@ public class ChiTietPXAdapter extends RecyclerView.Adapter<ChiTietPXAdapter.ChiT
         holder.tv_slsppx.setText(String.valueOf(item.getQuantity()));
         holder.tv_dongiasppx.setText(Convert.currencyFormat(item.getPrice()));
         holder.tv_tonggiasppx.setText(Convert.currencyFormat(item.getPrice()*item.getQuantity()));
-        Glide.with(context)
-                .load("https://res.cloudinary.com/shoesstation/image/upload/v1652698504/nike-air-force-1-low_pvldic.png")
-                .into(holder.ivSPPX);
         if (status==1) {
             holder.ivDeletectpx.setOnClickListener(new View.OnClickListener() {
                 @Override

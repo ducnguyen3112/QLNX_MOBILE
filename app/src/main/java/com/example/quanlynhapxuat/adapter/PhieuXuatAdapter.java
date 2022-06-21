@@ -1,5 +1,6 @@
 package com.example.quanlynhapxuat.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,8 +82,10 @@ implements Filterable {
             holder.tvStatus.setText("Đang xử lí");
         }else if(deliveryDocket.getStatus()==2){
             holder.tvStatus.setText("Hoàn thành");
+            holder.tvStatus.setTextColor(Color.parseColor("#28A745"));
         }else if(deliveryDocket.getStatus()==0) {
             holder.tvStatus.setText("Đã hủy");
+            holder.tvStatus.setTextColor(Color.parseColor("#C82333"));
         }
         holder.tvNgay.setText(deliveryDocket.getCreatedAt());
         int tong=0;
