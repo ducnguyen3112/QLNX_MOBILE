@@ -200,6 +200,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                         Log.e("postRD: ","Thêm phiếu nhập thành công!");
 
 //                        deleteInventotyInOldRDD();
+                        rddAdapter.deleteOldRDDList();//??
                         for(ReceivedDocketDetail item : rddAdapter.getRddList()) {
                             item.setReceivedDocketId(response.body().getId());
                             Log.e("item.setReceivedDocketId: ",item.getReceivedDocketId()+"");
@@ -363,7 +364,7 @@ public class ReceivedDocketDetailActivity extends AppCompatActivity {
                         public void onResponse(Call<Product2> call, Response<Product2> response) {
                             if(response.isSuccessful()) {
                                 Product2 p = response.body();
-                                //p.setInventory(p.getInventory()+ item.getQuantity());
+                                p.setInventory(p.getInventory()+ item.getQuantity());
                                 p.setPrice(item.getPrice());
                                 ApiUtils.getProductService().putProduct(p.getId(),p).enqueue(new Callback<Product2>() {
                                     @Override

@@ -293,6 +293,7 @@ public class ReceivedDocketAdapter extends RecyclerView.Adapter<ReceivedDocketAd
                 image.setWidth(80).setHeight(80);
 
                 tableListProducts.addCell(new Cell().add(new Paragraph(stt + "")).setTextAlignment(TextAlignment.CENTER));
+                //tableListProducts.addCell(new Cell().add(image));
                 tableListProducts.addCell(new Cell().add(image));
                 tableListProducts.addCell(new Cell().add(new Paragraph(product.getName()+"")));
                 tableListProducts.addCell(new Cell().add(new Paragraph(item.getPrice()+"")).setTextAlignment(TextAlignment.CENTER));

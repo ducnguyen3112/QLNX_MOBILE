@@ -349,7 +349,7 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
     }
 
     public void deleteOldRDDList() {
-        if(rddListOld==null) {
+        if(rddListOld==null||rddListOld.size()==0) {
             return;
         }
         for(ReceivedDocketDetail item : rddListOld) {
@@ -378,12 +378,15 @@ public class ReceivedDocketDetailAdapter extends RecyclerView.Adapter<ReceivedDo
                     if(response.isSuccessful()) {
                         Log.e("getProduct","success");
                         Product2 p = response.body();
-                        p.setInventory(p.getInventory()-item.getQuantity());
+                        int a = p.getInventory()-item.getQuantity();
+                        p.setInventory(a);
+                        Log.e("p.getInventory()-item.getQuantity()",p.getInventory()+" - "+item.getQuantity()+"");
                         ApiUtils.getProductService().putProduct(p.getId(),p).enqueue(new Callback<Product2>() {
                             @Override
                             public void onResponse(Call<Product2> call, Response<Product2> response) {
                                 if(response.isSuccessful()) {
                                     Log.e("putProduct","success");
+                                    Log.e("putProduct","success: " + response.body().getInventory());
                                 }
                                 else {
                                     Log.e("putProduct","successn't");
