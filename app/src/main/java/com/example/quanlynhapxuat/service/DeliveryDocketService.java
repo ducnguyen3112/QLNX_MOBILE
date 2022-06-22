@@ -27,7 +27,7 @@ public interface DeliveryDocketService {
             //http://192.168.0.6:8080/api//
             //https://shoesstation.herokuapp.com/api/
            // .baseUrl("https://shoesstation.herokuapp.com/api/")
-            .baseUrl("http://192.168.1.3:8080/api/")
+            .baseUrl("http://192.168.2.29:8080/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(DeliveryDocketService.class);

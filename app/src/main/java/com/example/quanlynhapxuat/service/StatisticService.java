@@ -17,7 +17,7 @@ public interface StatisticService {
     Gson gson=new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
     StatisticService statisticService= new Retrofit.Builder()
            // .baseUrl("https://shoesstation.herokuapp.com/api/")
-            .baseUrl("http://192.168.1.3:8080/api/")
+            .baseUrl("http://10.200.0.157:8080/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(StatisticService.class);

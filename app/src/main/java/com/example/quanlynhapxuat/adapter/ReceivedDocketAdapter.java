@@ -31,6 +31,7 @@ import com.example.quanlynhapxuat.model.ReceivedDocket;
 import com.example.quanlynhapxuat.model.ReceivedDocketDetail;
 import com.example.quanlynhapxuat.model.RestErrorResponse;
 import com.example.quanlynhapxuat.utils.Constants;
+import com.example.quanlynhapxuat.utils.Convert;
 import com.example.quanlynhapxuat.utils.CustomToast;
 import com.google.gson.Gson;
 import com.itextpdf.io.image.ImageData;
@@ -97,7 +98,7 @@ public class ReceivedDocketAdapter extends RecyclerView.Adapter<ReceivedDocketAd
         holder.tvID.setText("PN"+receivedDocket.getId());
         holder.tvCreatedAt.setText(receivedDocket.getCreatedAt());
         holder.tvSupplierName.setText(receivedDocket.getSupplier_name());
-        holder.tvTotalDocket.setText(getTotalDocket(receivedDocket.receivedDocketDetails)+"");
+        holder.tvTotalDocket.setText(Convert.currencyFormat(getTotalDocket(receivedDocket.receivedDocketDetails)) +" VND");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +121,8 @@ public class ReceivedDocketAdapter extends RecyclerView.Adapter<ReceivedDocketAd
 
     @Override
     public int getItemCount() {
-        return receivedDocketList==null ? 0 : receivedDocketList.size();
+        return receivedDocketList==null ?
+                0 : receivedDocketList.size();
     }
 
     public class ReceivedDocketViewHolder extends RecyclerView.ViewHolder {
@@ -291,6 +293,7 @@ public class ReceivedDocketAdapter extends RecyclerView.Adapter<ReceivedDocketAd
                 image.setWidth(80).setHeight(80);
 
                 tableListProducts.addCell(new Cell().add(new Paragraph(stt + "")).setTextAlignment(TextAlignment.CENTER));
+                //tableListProducts.addCell(new Cell().add(image));
                 tableListProducts.addCell(new Cell().add(image));
                 tableListProducts.addCell(new Cell().add(new Paragraph(product.getName()+"")));
                 tableListProducts.addCell(new Cell().add(new Paragraph(item.getPrice()+"")).setTextAlignment(TextAlignment.CENTER));

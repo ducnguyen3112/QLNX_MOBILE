@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 signinClick();
 //                Intent intent1=new Intent(LoginActivity.this,MainActivity.class);
+//                idLogin=1;
 //                startActivity(intent1);
                 break;
             case R.id.btn_go_signup:

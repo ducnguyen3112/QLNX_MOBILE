@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.quanlynhapxuat.R;
 import com.example.quanlynhapxuat.fragment.HomeFragment;
+import com.example.quanlynhapxuat.fragment.ProductFragment;
 import com.example.quanlynhapxuat.fragment.phieuxuat.AddExportFragment;
 import com.example.quanlynhapxuat.fragment.phieuxuat.ExportDetailFragment;
 import com.example.quanlynhapxuat.fragment.phieuxuat.ExportFragment;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     ImportFragment importFragment = new ImportFragment();
     MoreFragment moreFragment = new MoreFragment();
     ExportDetailFragment exportDetailFragment=new ExportDetailFragment();
+    ProductFragment productFragment = new ProductFragment();
     List<DeliveryDocketDetail> mDeliveryDocketDetails=new ArrayList<>();
     public static int width;
 
@@ -72,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.menu_more:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, moreFragment).commit();
+                        return true;
+                    case R.id.menu_products:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, productFragment).commit();
                         return true;
                 }
                 return false;
@@ -126,5 +131,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(AddExportFragment.TAG);
         fragmentTransaction.commit();
     }
-
 }

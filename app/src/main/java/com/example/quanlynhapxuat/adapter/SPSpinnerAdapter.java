@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.quanlynhapxuat.R;
 import com.example.quanlynhapxuat.model.Product;
+import com.example.quanlynhapxuat.model.Product2;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,13 @@ public class SPSpinnerAdapter extends BaseAdapter {
 
     public SPSpinnerAdapter(Context context, ArrayList<Product> productList) {
         this.context = context;
-        this.productList = productList;
+        //this.productList = productList;
+        this.productList = new ArrayList<Product>();
+        for(Product item : productList) {
+            if(item.getStatus()==1) {
+                this.productList.add(item);
+            }
+        }
     }
 
     @Override

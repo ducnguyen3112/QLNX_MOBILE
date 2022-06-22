@@ -2,96 +2,108 @@ package com.example.quanlynhapxuat.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlynhapxuat.R;
-import com.example.quanlynhapxuat.activity.DetailProductActivity;
-import com.example.quanlynhapxuat.adapter.ProductRecyclerViewAdapter;
+import com.example.quanlynhapxuat.activity.main.MainActivity;
+import com.example.quanlynhapxuat.activity.product.NewProductActivity;
+import com.example.quanlynhapxuat.adapter.ProductFragmentAdapter;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.Product;
+import com.example.quanlynhapxuat.model.Product2;
+import com.example.quanlynhapxuat.model.RestErrorResponse;
+import com.example.quanlynhapxuat.utils.CustomToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import java.util.ArrayList;;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductFragment extends Fragment {
+    public ProductFragmentAdapter adapter;
+    private ArrayList<Product2> products;
 
-    private RecyclerView recyclerView;
-    private ArrayList<Product> list = new ArrayList<>();
-    private ProductRecyclerViewAdapter mAdapter;
-    FloatingActionButton floatingActionButton;
+    private TextView tvTotal;
+    private RecyclerView rcvProducts;
+    private FloatingActionButton flbThemSP;
 
     public ProductFragment() {
     }
 
-    public static ProductFragment newInstance() {
-        ProductFragment fragment = new ProductFragment();
-        return fragment;
-    }
-
-    public ProductFragment(ArrayList<Product> list) {
-        this.list = list;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-        setControl(view);
+
+        //setControl
+        tvTotal = view.findViewById(R.id.tvTotal_fragmentProduct);
+        rcvProducts = view.findViewById(R.id.rcvProducts_fragmentProduct);
+        flbThemSP = view.findViewById(R.id.flbThemSP_fragmentProduct);
+
+        //showProducts
+        rcvProducts.setLayoutManager(new LinearLayoutManager((MainActivity) getActivity()));
+        adapter = new ProductFragmentAdapter((MainActivity) getContext());
         getProducts();
-        handleClickFloatingActionButton();
+        //rcvProducts.setAdapter(adapter);
+
+        //setEvents
+        flbThemSP.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(), NewProductActivity.class);
+            startActivity(intent);
+        });
+
         return view;
     }
 
-    private void setControl(View view) {
-        recyclerView = view.findViewById(R.id.recyclerView);
-        floatingActionButton = view.findViewById(R.id.floatingActionButton);
-    }
-
-    public void getProducts() {
-        ApiUtils.productRetrofit().getProducts().enqueue(new Callback<ArrayList<Product>>() {
+    private void getProducts() {
+        ApiUtils.getProductService().getProducts().enqueue(new Callback<ArrayList<Product2>>() {
             @Override
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                if (response.isSuccessful()) {
-                    list = response.body();
-                    mAdapter = new ProductRecyclerViewAdapter(getContext(), list);
-                    LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                    recyclerView.setLayoutManager(horizontalLayoutManager);
-                    recyclerView.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
+            public void onResponse(Call<ArrayList<Product2>> call, Response<ArrayList<Product2>> response) {
+                if(response.isSuccessful()) {
+                    products = response.body();
+                    if(products==null) {
+                        CustomToast.makeText(getContext(),"Danh sách sản phẩm rỗng!"
+                                ,CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+                    }
+                    else {
+                        adapter.setProducts(products);
+                        rcvProducts.setAdapter(adapter);
+                        tvTotal.setText(adapter.getItemCount()+"");
+                        Log.e("products.size()",products.size()+"");
+                    }
+                }
+                else {
+                    try {
+                        Gson g = new Gson();
+                        RestErrorResponse errorResponse = g.fromJson(response.errorBody().string(),RestErrorResponse.class);
+                        CustomToast.makeText(getContext(),"TRY: " + errorResponse.getMessage()
+                                ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
+                    }
+                    catch (Exception e) {
+                        CustomToast.makeText(getContext(),"CATCH: " + e.getMessage()
+                                ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-
+            public void onFailure(Call<ArrayList<Product2>> call, Throwable t) {
+                CustomToast.makeText((MainActivity) getContext(),"CALL API FAIL!!!"
+                        ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
             }
         });
     }
-
-    private void handleClickFloatingActionButton() {
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DetailProductActivity.class);
-                intent.putExtra("id", 0);
-                startActivity(intent);
-            }
-        });
-    }
-
 }

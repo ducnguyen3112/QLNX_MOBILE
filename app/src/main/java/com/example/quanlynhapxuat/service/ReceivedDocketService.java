@@ -18,15 +18,6 @@ import retrofit2.http.Path;
 
 public interface ReceivedDocketService {
 
-    Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
-
-    ReceivedDocketService RECEIVED_DOCKET_SERVICE = new Retrofit.Builder()
-            //.baseUrl("https://shoesstation.herokuapp.com/api/")
-            .baseUrl("http://192.168.1.3:8080/api/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-            .create(ReceivedDocketService.class);
-
     @GET("receivedDockets/")
     Call<ArrayList<ReceivedDocket>> getReceivedDocketList();
 

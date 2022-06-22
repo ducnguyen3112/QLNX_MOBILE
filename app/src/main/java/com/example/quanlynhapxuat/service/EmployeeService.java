@@ -20,7 +20,7 @@ public interface EmployeeService {
             //http://192.168.0.6:8080/api/employees/
             //https://shoesstation.herokuapp.com/api/employees/
             //.baseUrl("https://shoesstation.herokuapp.com/api/")
-            .baseUrl("http://192.168.1.3:8080/api/")
+            .baseUrl("http://192.168.2.29:8080/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(EmployeeService.class);

@@ -7,12 +7,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.quanlynhapxuat.R;
 import com.example.quanlynhapxuat.activity.ReceivedDocket.ReceivedDocketDetailActivity;
@@ -20,13 +18,14 @@ import com.example.quanlynhapxuat.activity.main.MainActivity;
 import com.example.quanlynhapxuat.adapter.ReceivedDocketAdapter;
 import com.example.quanlynhapxuat.api.ApiUtils;
 import com.example.quanlynhapxuat.model.ReceivedDocket;
-import com.example.quanlynhapxuat.model.ReceivedDocketDetail;
 import com.example.quanlynhapxuat.model.RestErrorResponse;
+import com.example.quanlynhapxuat.utils.Convert;
 import com.example.quanlynhapxuat.utils.CustomToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,6 +58,9 @@ public class ImportFragment extends Fragment {
         rcvListPhieuNhap.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvListPhieuNhap.setAdapter(receivedDocketAdapter);
 
+        capNhatDuLieu();
+
+
         //setEvent
         flbThemPhieuNhap.setOnClickListener(view1 -> {
             Intent intent = new Intent(getActivity(),ReceivedDocketDetailActivity.class);
@@ -66,18 +68,12 @@ public class ImportFragment extends Fragment {
             startActivity(intent);
         });
 
-        capNhatDuLieu();
-
         return view;
     }
 
     private void capNhatDuLieu() {
         getReceivedDocketList();
-        receivedDocketAdapter.setReceivedDocketList(receivedDocketList);
         receivedDocketAdapter.notifyDataSetChanged();
-
-        tvSLPhieuNhap.setText(receivedDocketAdapter.getItemCount()+"");
-        tvTotal.setText(receivedDocketAdapter.getTotalList()+"");
     }
 
     private void getReceivedDocketList() {
@@ -87,19 +83,26 @@ public class ImportFragment extends Fragment {
                 if(response.isSuccessful()) {
                     receivedDocketList = response.body();
                     if(receivedDocketList==null) {
-                        CustomToast.makeText(getContext(),"Danh sách phiếu nhập rỗng!"
+                        CustomToast.makeText((MainActivity) getActivity(),"Danh sách phiếu nhập rỗng!"
                                 ,CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+                    }
+                    else {
+                        Collections.reverse(receivedDocketList);
+                        receivedDocketAdapter.setReceivedDocketList(receivedDocketList);
+                        tvSLPhieuNhap.setText(receivedDocketAdapter.getItemCount()+"");
+                        tvTotal.setText(Convert.currencyFormat(receivedDocketAdapter.getTotalList())+" VND");
+
                     }
                 }
                 else {
                     try {
                         Gson g = new Gson();
                         RestErrorResponse errorResponse = g.fromJson(response.errorBody().string(),RestErrorResponse.class);
-                        CustomToast.makeText(getContext(),"TRY: " + errorResponse.getMessage()
+                        CustomToast.makeText((MainActivity) getActivity(),"TRY: " + errorResponse.getMessage()
                                 ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
                     }
                     catch (Exception e) {
-                        CustomToast.makeText(getContext(),"CATCH: " + e.getMessage()
+                        CustomToast.makeText((MainActivity) getActivity(),"CATCH: " + e.getMessage()
                                 ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
                     }
                 }
@@ -107,9 +110,13 @@ public class ImportFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ReceivedDocket>> call, Throwable t) {
-                CustomToast.makeText(getContext(),"CALL API FAIL!!!"
-                        ,CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        capNhatDuLieu();
     }
 }

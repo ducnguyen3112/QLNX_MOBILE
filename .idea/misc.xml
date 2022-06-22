@@ -3,51 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/drawable/ic_bars_nav.xml" value="0.1" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/drawable/ic_box_nav.xml" value="0.1" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/drawable/ic_export_nav.xml" value="0.1" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/drawable/ic_import_nav.xml" value="0.1" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/layout/activity_main.xml" value="0.275" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/layout/fragment_export.xml" value="0.275" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/layout/fragment_home.xml" value="0.275" />
-        <entry key="..\:/Documents/DiDong/QuanLyNhapXuat_mobile/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.19718309859154928" />
-        <entry key="..\:/Projects/Android/app/src/main/res/drawable/bg_spinner.xml" value="0.176" />
-        <entry key="..\:/Projects/Android/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1945" />
-        <entry key="..\:/Projects/Android/app/src/main/res/drawable/rounded_corners_button_border.xml" value="0.1945" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/activity_main.xml" value="0.2164855072463768" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/custom_alert_dialog.xml" value="0.264" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/custom_dialog.xml" value="0.1" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/fragment_add_export.xml" value="0.264" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/fragment_export.xml" value="0.264" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/fragment_export_detail.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/item_ctpx.xml" value="0.264" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/item_khachhang_spinner.xml" value="0.2259963768115942" />
-        <entry key="..\:/Projects/Android/app/src/main/res/layout/item_phieuxuat.xml" value="0.1" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_done_all_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_email_24_focused.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_local_phone_24_focused.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_location_on_24_focused.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_baseline_replay_24.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/drawable/ic_close_svgrepo_com.xml" value="0.24" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/layout/activity_forgot_passwd.xml" value="0.11302083333333333" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/layout/fragment_more.xml" value="0.17481884057971014" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/layout/item_ctpx.xml" value="0.18802083333333333" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/layout/item_taoctpx.xml" value="0.36666666666666664" />
-        <entry key="..\:/Projects/HDV_MOBILE/app/src/main/res/menu/popup_menu_ctpx.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_add_employee.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_add_khactivity.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_detail_product.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_edit_product.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_product.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_product_edit.xml" value="0.264" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_product_new.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/activity_received_docket_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/dialog_sua_sl_sp_rdd.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/fragment_import.xml" value="0.264" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/fragment_product.xml" value="0.264" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/item_product.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/item_product_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ahrix/Desktop/QLNX_MOBILE/app/src/main/res/layout/item_received_docket_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/drawable/custom_button_2.xml" value="0.1" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/drawable/custom_person_icon.xml" value="0.1565" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/layout/activity_list_khactivity.xml" value="0.25416666666666665" />
@@ -73,18 +42,6 @@
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1685" />
         <entry key="..\:/Users/ahrix/Desktop/QuanLyNhapXuat_mobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1655" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/drawable/button1_bg.xml" value="0.1" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/drawable/ic_back.xml" value="0.1125" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/drawable/ic_mail.xml" value="0.1125" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/drawable/ic_person.xml" value="0.1" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/drawable/ic_phone.xml" value="0.1125" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/layout/activity_fogot_passwd.xml" value="0.27447916666666666" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/layout/activity_forgot_passwd.xml" value="0.2" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/layout/activity_main.xml" value="0.21467391304347827" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/layout/activity_signup.xml" value="0.2" />
-        <entry key="..\:/duc/QuanLyNhapXuat/app/src/main/res/layout/activity_verify_otp.xml" value="0.2" />
       </map>
     </option>
   </component>
